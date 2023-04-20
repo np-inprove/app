@@ -5,11 +5,15 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint --cache .",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "typecheck": "vue-tsc --noEmit"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.38.5",
     "@types/node": "^18",
+    "eslint": "^8.38.0",
     "nuxt": "^3.4.1"
   }
 }

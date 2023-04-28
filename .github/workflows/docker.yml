@@ -67,7 +67,7 @@ jobs:
         run: podman pull ghcr.io/np-inprove/app:${{ needs.docker.outputs.version }}
 
       - name: Stop previous container
-        run: podman stop app || echo "Stopping previous container..."
+        run: podman stop app && podman rm app || echo "Stopping previous container..."
 
       - name: Start new container
         run: podman run -p 3000:3000 --name app -d ghcr.io/np-inprove/app:${{ needs.docker.outputs.version }}

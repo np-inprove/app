@@ -61,11 +61,11 @@ jobs:
     needs: docker
     permissions:
       packages: read
-    
+
     steps:
       - name: Pull latest image
         run: podman pull ghcr.io/np-inprove/app:${{ needs.docker.outputs.version }}
-      
+
       - name: Stop previous container
         run: podman stop app || echo "Stopping previous container..."
 

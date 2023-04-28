@@ -14,7 +14,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     outputs:
-      tags: ${{ steps.metal.outputs.tags }}
+      version: ${{ steps.metal.outputs.version }}
     permissions:
       contents: read
       packages: write
@@ -64,4 +64,4 @@ jobs:
     
     steps:
       - name: Pull latest image
-        run: podman pull ghcr.io/np-inprove/app:${{ needs.docker.outputs.tags }}
+        run: podman pull ghcr.io/np-inprove/app:${{ needs.docker.outputs.version }}

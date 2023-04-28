@@ -1,4 +1,4 @@
-name: build & push docker container
+name: build, push & deploy docker container
 
 on:
   push:
@@ -52,3 +52,13 @@ jobs:
           labels: ${{ steps.metal.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    runs-on: self-hosted
+    permissions:
+      packages: read
+    
+    steps:
+      - name: Pull latest image
+        run: podman pull ghcr.io/np-inprove/app:${{ steps.metal.outputs.tags }}

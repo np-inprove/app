@@ -4,7 +4,7 @@ node_modules
 .nitro
 .cache
 .output
-.env
+#.env # Not ignoring this file because it can contain build-related settings.
 dist
 .DS_Store
 .eslintcache

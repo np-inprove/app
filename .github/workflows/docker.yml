@@ -70,7 +70,7 @@ jobs:
         run: podman stop app || echo "Stopping previous container..."
 
       - name: Start new container
-        run: podman run -p 3000:3000 ghcr.io/np-inprove/app:${{ needs.docker.outputs.version }}
+        run: podman run -p 3000:3000 --name app ghcr.io/np-inprove/app:${{ needs.docker.outputs.version }}
 
       - name: Clear unused images
         run: podman rmi $(podman images -f "dangling=true" -q)

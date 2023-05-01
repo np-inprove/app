@@ -5,7 +5,7 @@ on:
     branches:
       - main
     tags:
-      - '*'
+      - 'v*'
   pull_request:
     branches:
       - main
@@ -54,23 +54,3 @@ jobs:
           labels: ${{ steps.metal.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
-  deploy:
-    if: github.event_name != 'pull_request'
-    runs-on: self-hosted
-    needs: docker
-    permissions:
-      packages: read
-
-    steps:
-      - name: Pull latest image
-        run: podman pull ghcr.io/np-inprove/app:${{ needs.docker.outputs.version }}
-
-      - name: Stop previous container
-        run: podman stop app && podman rm app || echo "Stopping previous container..."
-
-      - name: Start new container
-        run: podman run -p 3000:3000 --name app -d ghcr.io/np-inprove/app:${{ needs.docker.outputs.version }}
-
-      - name: Clear unused images
-        run: podman rmi $(podman images -f "dangling=true" -q)

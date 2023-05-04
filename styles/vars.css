@@ -1,0 +1,7 @@
+:root {
+  --c-bg-base: #F3F6FA;
+}
+
+.dark {
+  --c-bg-base: #2B2E33;
+}

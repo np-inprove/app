@@ -10,6 +10,11 @@ import {
 } from 'unocss'
 
 export default defineConfig({
+  shortcuts: [
+    {
+      'bg-base': 'bg-$c-bg-base',
+    },
+  ],
   presets: [
     presetUno({
       attributifyPseudo: true,

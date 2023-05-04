@@ -2,20 +2,13 @@
   <div h-full>
     <header>
       <div container mx-auto>
-        <div px5 py3 flex>
+        <div px5 py8 flex>
           <img h-8 src="~/assets/logos/small.webp" alt="iNProve">
           <div ml-auto>
-            <NuxtLink to="/about">
-              About Us
+            <NuxtLink to="/login" class="btn-ghost">
+              Register
             </NuxtLink>
-          </div>
-          <div px5>
-            <NuxtLink to="/faq">
-              Support
-            </NuxtLink>
-          </div>
-          <div>
-            <NuxtLink to="/login">
+            <NuxtLink to="/login" class="btn-primary">
               Login
             </NuxtLink>
           </div>

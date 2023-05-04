@@ -13,6 +13,9 @@ export default defineConfig({
   shortcuts: [
     {
       'bg-base': 'bg-$c-bg-base',
+
+      'btn-primary': 'text-$c-text-btn-primary bg-$c-primary hover:bg-$c-primary-active rounded-lg px-4 py-2',
+      'btn-ghost': 'text-$c-text-base rounded-lg px-4 py-2',
     },
   ],
   presets: [

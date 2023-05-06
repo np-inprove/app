@@ -14,6 +14,10 @@
 
 :root {
   --c-bg-base: #F3F6FA;
+  --c-bg-btn-icon-hover: #e5e7eb;
+
+  --c-border-base: #c7d2fe;
+  --c-ring-base: #c7d2fe;
 
   --c-text-btn-primary: #eef2ff;
   --c-text-base: #020617;
@@ -26,6 +30,10 @@
   --c-primary-fade: var(--c-dark-primary-fade);
 
   --c-bg-base: #2B2E33;
+  --c-bg-btn-icon-hover: #1f2937;
+
+  --c-border-base: #312e81;
+  --c-ring-base: #1f2937;
 
   --c-text-base: #eef2ff;
 }

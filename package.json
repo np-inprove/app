@@ -13,6 +13,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.5",
+    "@headlessui/vue": "^1.7.13",
+    "@iconify-json/tabler": "^1.1.74",
     "@types/node": "^18.16.1",
     "@unocss/nuxt": "^0.51.8",
     "eslint": "^8.39.0",

@@ -36,7 +36,7 @@ const items = [
           </NuxtLink>
 
           <Popover md:hidden>
-            <PopoverButton btn-icon>
+            <PopoverButton btn-outlined>
               <div text-xl i-tabler-menu-2 />
             </PopoverButton>
 
@@ -49,7 +49,7 @@ const items = [
               leave-to-class="translate-y-1 opacity-0"
             >
               <PopoverPanel fixed z-10 top-0 inset-x-0 p-3 transition transform origin-top-right>
-                <div p-4 rounded-lg shadow-lg ring-1 ring-opacity-5 bg-base ring>
+                <div p-4 rounded-lg shadow-lg ring-1 ring-opacity-5 bg-surface ring>
                   <div flex justify-end>
                     <PopoverButton btn-icon>
                       <div text-xl i-tabler-x />
@@ -59,7 +59,7 @@ const items = [
                   <div flex="~ col gap-3" items-start>
                     <NuxtLink
                       v-for="item in items" :key="item.to" :to="item.to"
-                      :class="item.primary ? 'btn-primary' : 'btn-link'"
+                      :class="item.primary ? 'btn-filled' : 'btn-text'"
                     >
                       {{ item.name }}
                     </NuxtLink>
@@ -69,10 +69,10 @@ const items = [
             </Transition>
           </Popover>
 
-          <div md:flex md:items-center gap-10 hidden>
+          <div md:flex md:items-center gap-5 hidden>
             <NuxtLink
               v-for="item in items" :key="item.to" :to="item.to"
-              :class="item.primary ? 'btn-primary' : 'btn-link'"
+              :class="item.primary ? 'btn-filled' : 'btn-text'"
             >
               {{ item.name }}
             </NuxtLink>

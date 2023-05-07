@@ -11,6 +11,5 @@ html.dark {
 }
 
 html {
-  --at-apply: bg-base text-base;
+  --at-apply: bg-surface text-on-surface;
 }
-

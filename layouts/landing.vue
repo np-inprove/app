@@ -29,15 +29,15 @@ const items = [
 <template>
   <div h-full>
     <nav>
-      <div container mx-auto>
-        <div px5 py8 flex items-center justify-between>
+      <div mx-auto container>
+        <div flex items-center justify-between px5 py8>
           <NuxtLink to="/">
             <img h-8 src="~/assets/logos/small.webp" alt="iNProve">
           </NuxtLink>
 
           <Popover md:hidden>
             <PopoverButton btn-outlined>
-              <div text-xl i-tabler-menu-2 />
+              <div i-tabler-menu-2 text-xl />
             </PopoverButton>
 
             <Transition
@@ -48,11 +48,11 @@ const items = [
               leave-from-class="translate-y-0 opacity-100"
               leave-to-class="translate-y-1 opacity-0"
             >
-              <PopoverPanel fixed z-10 top-0 inset-x-0 p-3 transition transform origin-top-right>
-                <div p-4 rounded-lg shadow-lg ring-1 ring-opacity-5 bg-surface ring>
+              <PopoverPanel fixed inset-x-0 top-0 z-10 origin-top-right transform p-3 transition>
+                <div rounded-lg bg-surface p-4 shadow-lg ring ring-1 ring-opacity-5>
                   <div flex justify-end>
                     <PopoverButton btn-icon>
-                      <div text-xl i-tabler-x />
+                      <div i-tabler-x text-xl />
                     </PopoverButton>
                   </div>
 
@@ -69,7 +69,7 @@ const items = [
             </Transition>
           </Popover>
 
-          <div md:flex md:items-center gap-5 hidden>
+          <div hidden gap-5 md:flex md:items-center>
             <NuxtLink
               v-for="item in items" :key="item.to" :to="item.to"
               :class="item.primary ? 'btn-filled' : 'btn-text'"
@@ -80,7 +80,7 @@ const items = [
         </div>
       </div>
     </nav>
-    <main container mx-auto>
+    <main mx-auto container>
       <div px5>
         <slot />
       </div>

@@ -16,9 +16,12 @@
     "@headlessui/vue": "^1.7.13",
     "@iconify-json/tabler": "^1.1.74",
     "@types/node": "^18.16.5",
+    "@unocss/eslint-config": "^0.51.12",
     "@unocss/nuxt": "^0.51.12",
-    "eslint": "^8.40.0",
+    "eslint": "8.39.0",
+    "lint-staged": "^13.2.2",
     "nuxt": "^3.4.3",
+    "simple-git-hooks": "^2.8.1",
     "vue-tsc": "^1.6.4"
   }
 }

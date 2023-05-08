@@ -16,13 +16,13 @@ RUN apk add git --no-cache
 COPY package.json ./
 COPY pnpm-lock.yaml ./
 
-RUN pnpm i --frozen-lockfile --ignore-scripts
+RUN pnpm i -f --frozen-lockfile --ignore-scripts
 
 # Copy all source files
 COPY . ./
 
 # Run full install with every postinstall script ( This needs project file )
-RUN pnpm i --frozen-lockfile
+RUN pnpm i -f --frozen-lockfile
 
 # Build
 RUN pnpm build

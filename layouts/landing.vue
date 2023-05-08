@@ -41,29 +41,26 @@ const items = [
             </PopoverButton>
 
             <Transition
-              enter-active-class="transition duration-200 ease-out"
-              enter-from-class="translate-y-1 opacity-0"
-              enter-to-class="translate-y-0 opacity-100"
-              leave-active-class="transition duration-150 ease-in"
-              leave-from-class="translate-y-0 opacity-100"
-              leave-to-class="translate-y-1 opacity-0"
+              enter-active-class="transition duration-100 ease-out"
+              enter-from-class="transform scale-95 opacity-0" enter-to-class="transform scale-100 opacity-100"
+              leave-active-class="transition duration-75 ease-in" leave-from-class="transform scale-100 opacity-100"
+              leave-to-class="transform scale-95 opacity-0"
             >
               <PopoverPanel fixed inset-x-0 top-0 z-10 origin-top-right transform p-3 transition>
-                <div rounded-lg bg-surface p-4 shadow-lg ring ring-1 ring-opacity-5>
-                  <div flex justify-end>
-                    <PopoverButton btn-icon>
-                      <div i-tabler-x text-xl />
-                    </PopoverButton>
-                  </div>
+                <div flex items-start gap-2 rounded-lg bg-surface px-2 py-3 shadow-lg ring ring-1 ring-opacity-5>
+                  <div flex="~ 1 col gap-3">
+                    <NuxtLink to="/">
+                      <img m-3 h-8 src="~/assets/logos/small.webp" alt="iNProve">
+                    </NuxtLink>
 
-                  <div flex="~ col gap-3" items-start>
-                    <NuxtLink
-                      v-for="item in items" :key="item.to" :to="item.to"
-                      :class="item.primary ? 'btn-filled' : 'btn-text'"
-                    >
+                    <NuxtLink v-for="item in items" :key="item.to" :to="item.to" text-lg btn-text>
                       {{ item.name }}
                     </NuxtLink>
                   </div>
+
+                  <PopoverButton btn-outlined>
+                    <div i-tabler-x text-xl />
+                  </PopoverButton>
                 </div>
               </PopoverPanel>
             </Transition>

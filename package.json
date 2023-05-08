@@ -23,5 +23,11 @@
     "nuxt": "^3.4.3",
     "simple-git-hooks": "^2.8.1",
     "vue-tsc": "^1.6.4"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }

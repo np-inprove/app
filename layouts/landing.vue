@@ -47,20 +47,24 @@ const items = [
               leave-to-class="transform scale-95 opacity-0"
             >
               <PopoverPanel fixed inset-x-0 top-0 z-10 origin-top-right transform p-3 transition>
-                <div flex items-start gap-2 rounded-lg bg-surface px-2 py-3 shadow-lg ring ring-1 ring-opacity-5>
-                  <div flex="~ 1 col gap-3">
+                <div gap-2 rounded-lg bg-surface px-2 py-3 shadow-lg ring ring-1 ring-opacity-5>
+                  <div mb-3 flex="~ gap-3" justify-between>
                     <NuxtLink to="/">
                       <img m-3 h-8 src="~/assets/logos/small.webp" alt="iNProve">
                     </NuxtLink>
 
+                    <div>
+                      <PopoverButton btn-outlined>
+                        <div i-tabler-x text-xl />
+                      </PopoverButton>
+                    </div>
+                  </div>
+
+                  <div flex="~ col">
                     <NuxtLink v-for="item in items" :key="item.to" :to="item.to" text-lg btn-text>
                       {{ item.name }}
                     </NuxtLink>
                   </div>
-
-                  <PopoverButton btn-outlined>
-                    <div i-tabler-x text-xl />
-                  </PopoverButton>
                 </div>
               </PopoverPanel>
             </Transition>

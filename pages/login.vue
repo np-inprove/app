@@ -20,25 +20,31 @@ function login() {
 
 <template>
   <div flex justify-center text-center>
-    <div bg-primary-container rounded-3xl p-10 class="w-full md:w-3/5" h-fit>
-      <h1 text-15 pb-5>Login</h1>
+    <div class="w-full md:w-3/5" h-fit rounded-3xl bg-primary-container p-10>
+      <h1 pb-5 text-15>
+        Login
+      </h1>
       <form flex flex-col @submit.prevent="login">
         <div flex justify-center>
-          <input id="email" v-model="forminfo.email" type="email" name="email" placeholder="Email" rounded-3xl p-5 m-3
-            mx-0 md:mx-5 w-full required>
+          <input
+            id="email" v-model="forminfo.email" type="email" name="email" placeholder="Email"
+            required m-3 mx-0 w-full rounded-3xl p-5 md:mx-5
+          >
         </div>
         <div flex justify-center>
-          <input id="password" v-model="forminfo.password" type="password" name="password" placeholder="Password"
-            rounded-3xl p-5 m-3 mx-0 md:mx-5 w-full required>
+          <input
+            id="password" v-model="forminfo.password" type="password" name="password" placeholder="Password"
+            required m-3 mx-0 w-full rounded-3xl p-5 md:mx-5
+          >
         </div>
         <div flex justify-center>
-          <button type="submit" btn-filled w-fit m-5>
+          <button type="submit" m-5 w-fit btn-filled>
             Login
           </button>
         </div>
       </form>
       <div>
-        <p text-error font-bold>
+        <p font-bold text-error>
           {{ errormessage }}
         </p>
       </div>

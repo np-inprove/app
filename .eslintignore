@@ -1,10 +1,11 @@
 *.css
 *.png
+*.jpg
+*.webp
 *.ico
 *.toml
 *.patch
 *.txt
 Dockerfile
 public/
-assets/*.webp
 Dockerfile

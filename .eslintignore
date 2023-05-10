@@ -6,5 +6,5 @@
 *.txt
 Dockerfile
 public/
-assets/
+assets/*.webp
 Dockerfile

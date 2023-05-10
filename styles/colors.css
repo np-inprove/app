@@ -1,201 +1,92 @@
-/* 
-  Colors referenced from: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/purple.css
-*/
-
 :root {
-  --purple1: 280, 65.0%, 99.4%;
-  --purple2: 276, 100%, 99.0%;
-  --purple3: 276, 83.1%, 97.0%;
-  --purple4: 275, 76.4%, 94.7%;
-  --purple5: 275, 70.8%, 91.8%;
-  --purple6: 274, 65.4%, 87.8%;
-  --purple7: 273, 61.0%, 81.7%;
-  --purple8: 272, 60.0%, 73.5%;
-  --purple9: 272, 51.0%, 54.0%;
-  --purple10: 272, 46.8%, 50.3%;
-  --purple11: 272, 50.0%, 45.8%;
-  --purple12: 272, 66.0%, 16.0%;
-}
+  --c-primary-0: 0, 0%, 0%;
+  --c-primary-10: 256, 100.0%, 11.0%;
+  --c-primary-20: 256, 100.0%, 16.0%;
+  --c-primary-30: 255, 100.0%, 22.0%;
+  --c-primary-40: 255, 100.0%, 26.0%;
+  --c-primary-50: 255, 91.0%, 34.0%;
+  --c-primary-60: 256, 70.0%, 44.0%;
+  --c-primary-70: 256, 80.0%, 59.0%;
+  --c-primary-80: 256, 79.0%, 74.0%;
+  --c-primary-90: 255, 100.0%, 89.0%;
+  --c-primary-95: 254, 100.0%, 95.0%;
+  --c-primary-99: 253, 100.0%, 98.0%;
+  --c-primary-100: 0, 0%, 100.0%;
 
-/* 
-  Colors referenced from: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/indigo.css
-*/
+  --c-secondary-0: 0, 0%, 0%;
+  --c-secondary-10: 253, 26.0%, 13.0%;
+  --c-secondary-20: 258, 18.0%, 22.0%;
+  --c-secondary-30: 258, 13.0%, 31.0%;
+  --c-secondary-40: 259, 11.0%, 40.0%;
+  --c-secondary-50: 253, 9.0%, 49.0%;
+  --c-secondary-60: 255, 12.0%, 60.0%;
+  --c-secondary-70: 245, 17.0%, 70.0%;
+  --c-secondary-80: 252, 27.0%, 81.0%;
+  --c-secondary-90: 249, 65.0%, 92.0%;
+  --c-secondary-95: 263, 100.0%, 96.0%;
+  --c-secondary-99: 315, 100.0%, 99.0%;
+  --c-secondary-100: 0, 0%, 100.0%;
 
-:root {
-  --indigo1: 225, 60.0%, 99.4%;
-  --indigo2: 223, 100%, 98.6%;
-  --indigo3: 223, 98.4%, 97.1%;
-  --indigo4: 223, 92.9%, 95.0%;
-  --indigo5: 224, 87.1%, 92.0%;
-  --indigo6: 224, 81.9%, 87.8%;
-  --indigo7: 225, 77.4%, 82.1%;
-  --indigo8: 226, 75.4%, 74.5%;
-  --indigo9: 226, 70.0%, 55.5%;
-  --indigo10: 226, 58.6%, 51.3%;
-  --indigo11: 226, 55.0%, 45.0%;
-  --indigo12: 226, 62.0%, 17.0%;
-}
+  --c-tertiary-0: 0, 0%, 0%;
+  --c-tertiary-10: 197, 79.0%, 15.0%;
+  --c-tertiary-20: 196, 64.0%, 24.0%;
+  --c-tertiary-30: 194, 70.0%, 27.0%;
+  --c-tertiary-40: 193, 82.0%, 31.0%;
+  --c-tertiary-50: 192, 91.0%, 36.0%;
+  --c-tertiary-60: 189, 94.0%, 43.0%;
+  --c-tertiary-70: 188, 86.0%, 53.0%;
+  --c-tertiary-80: 187, 92.0%, 69.0%;
+  --c-tertiary-90: 186, 94.0%, 82.0%;
+  --c-tertiary-95: 185, 96.0%, 90.0%;
+  --c-tertiary-99: 183, 100.0%, 96.0%;
+  --c-tertiary-100: 0, 0%, 100.0%;
 
-/* 
-  Colors referenced from: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/plum.css
-*/
+  --c-error-0: 0, 0%, 0%;
+  --c-error-10: 3, 71.0%, 15.0%;
+  --c-error-20: 3, 71.0%, 22.0%;
+  --c-error-30: 3, 71.0%, 32.0%;
+  --c-error-40: 3, 71.0%, 41.0%;
+  --c-error-50: 3, 71.0%, 52.0%;
+  --c-error-60: 3, 71.0%, 64.0%;
+  --c-error-70: 3, 71.0%, 74.0%;
+  --c-error-80: 3, 70.0%, 83.0%;
+  --c-error-90: 4, 71.0%, 92.0%;
+  --c-error-95: 0, 70.0%, 96.0%;
+  --c-error-99: 20, 100.0%, 99.0%;
+  --c-error-100: 0, 0%, 100.0%;
 
-:root {
-  --plum1: 292, 90.0%, 99.4%;
-  --plum2: 300, 100%, 98.6%;
-  --plum3: 299, 71.2%, 96.4%;
-  --plum4: 299, 62.0%, 93.8%;
-  --plum5: 298, 56.1%, 90.5%;
-  --plum6: 296, 51.3%, 85.8%;
-  --plum7: 295, 48.2%, 78.9%;
-  --plum8: 292, 47.7%, 70.8%;
-  --plum9: 292, 45.0%, 51.0%;
-  --plum10: 292, 50.2%, 46.9%;
-  --plum11: 292, 60.0%, 42.5%;
-  --plum12: 291, 66.0%, 14.0%;
-}
+  --c-neutral-0: 0, 0%, 0%;
+  --c-neutral-10 : 245, 92.2%, 10%;
+  --c-neutral-20 : 254, 80.0%, 13.7%;
+  --c-neutral-30 : 254, 70.8%, 17.5%;
+  --c-neutral-40 : 254, 62.2%, 21.8%;
+  --c-neutral-50 : 255, 55.2%, 26.3%;
+  --c-neutral-60 : 254, 47.5%, 31.4%;
+  --c-neutral-70 : 254, 40.9%, 36.5%;
+  --c-neutral-80 : 254, 34.9%, 42.2%;
+  --c-neutral-87 : 255, 29.8%, 48.0%;
+  --c-neutral-90 : 254, 29.3%, 54.5%;
+  --c-neutral-92 : 255, 30.7%, 61.0%;
+  --c-neutral-94 : 254, 32.5%, 68.0%;
+  --c-neutral-95 : 255, 34.9%, 75.3%;
+  --c-neutral-96 : 255, 37.9%, 82.9%;
+  --c-neutral-98 : 240, 40.4%, 90.8%;
+  --c-neutral-99 : 240, 100.0%, 99.2%;
+  --c-neutral-100: 0, 0%, 100.0%;
 
-/* 
-  Colors referenced from: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/red.css
-*/
-
-:root {
-  --red1: 359, 100%, 99.4%;
-  --red2: 359, 100%, 98.6%;
-  --red3: 360, 100%, 96.8%;
-  --red4: 360, 97.9%, 94.8%;
-  --red5: 360, 90.2%, 91.9%;
-  --red6: 360, 81.7%, 87.8%;
-  --red7: 359, 74.2%, 81.7%;
-  --red8: 359, 69.5%, 74.3%;
-  --red9: 358, 75.0%, 59.0%;
-  --red10: 358, 69.4%, 55.2%;
-  --red11: 358, 65.0%, 48.7%;
-  --red12: 354, 50.0%, 14.6%;
-}
-
-/* 
-  Colors referenced from: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/gray.css
-*/
-
-:root {
-  --gray1: 0, 0%, 99.0%;
-  --gray2: 0, 0%, 97.3%;
-  --gray3: 0, 0%, 95.1%;
-  --gray4: 0, 0%, 93.0%;
-  --gray5: 0, 0%, 90.9%;
-  --gray6: 0, 0%, 88.7%;
-  --gray7: 0, 0%, 85.8%;
-  --gray8: 0, 0%, 78.0%;
-  --gray9: 0, 0%, 56.1%;
-  --gray10: 0, 0%, 52.3%;
-  --gray11: 0, 0%, 43.5%;
-  --gray12: 0, 0%, 9.0%;
-}
-
-/* 
-  Colors referenced from: https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/mauve.css
-*/
-
-:root {
-  --mauve1: 300, 20.0%, 99.0%;
-  --mauve2: 300, 7.7%, 97.5%;
-  --mauve3: 294, 5.5%, 95.3%;
-  --mauve4: 289, 4.7%, 93.3%;
-  --mauve5: 283, 4.4%, 91.3%;
-  --mauve6: 278, 4.1%, 89.1%;
-  --mauve7: 271, 3.9%, 86.3%;
-  --mauve8: 255, 3.7%, 78.8%;
-  --mauve9: 252, 4.0%, 57.3%;
-  --mauve10: 253, 3.5%, 53.5%;
-  --mauve11: 252, 4.0%, 44.8%;
-  --mauve12: 260, 25.0%, 11.0%;
-}
-
-:root {
-  --c-primary-0: #000;
-  --c-primary-10: var(--purple12);
-  --c-primary-20: var(--purple11);
-  --c-primary-30: var(--purple10);
-  --c-primary-40: var(--purple9);
-  --c-primary-50: var(--purple8);
-  --c-primary-60: var(--purple7);
-  --c-primary-70: var(--purple6);
-  --c-primary-80: var(--purple5);
-  --c-primary-90: var(--purple4);
-  --c-primary-95: var(--purple3);
-  --c-primary-99: var(--purple2);
-  --c-primary-100: var(--purple1);
-
-  --c-secondary-0: #000;
-  --c-secondary-10: var(--indigo12);
-  --c-secondary-20: var(--indigo11);
-  --c-secondary-30: var(--indigo10);
-  --c-secondary-40: var(--indigo9);
-  --c-secondary-50: var(--indigo8);
-  --c-secondary-60: var(--indigo7);
-  --c-secondary-70: var(--indigo6);
-  --c-secondary-80: var(--indigo5);
-  --c-secondary-90: var(--indigo4);
-  --c-secondary-95: var(--indigo3);
-  --c-secondary-99: var(--indigo2);
-  --c-secondary-100: var(--indigo1);
-
-  --c-tertiary-0: #000;
-  --c-tertiary-10: var(--plum12);
-  --c-tertiary-20: var(--plum11);
-  --c-tertiary-30: var(--plum10);
-  --c-tertiary-40: var(--plum9);
-  --c-tertiary-50: var(--plum8);
-  --c-tertiary-60: var(--plum7);
-  --c-tertiary-70: var(--plum6);
-  --c-tertiary-80: var(--plum5);
-  --c-tertiary-90: var(--plum4);
-  --c-tertiary-95: var(--plum3);
-  --c-tertiary-99: var(--plum2);
-  --c-tertiary-100: var(--plum1);
-
-  --c-error-0: #000;
-  --c-error-10: var(--red12);
-  --c-error-20: var(--red11);
-  --c-error-30: var(--red10);
-  --c-error-40: var(--red9);
-  --c-error-50: var(--red8);
-  --c-error-60: var(--red7);
-  --c-error-70: var(--red6);
-  --c-error-80: var(--red5);
-  --c-error-90: var(--red4);
-  --c-error-95: var(--red3);
-  --c-error-99: var(--red2);
-  --c-error-100: var(--red1);
-
-  --c-neutral-0: #000;
-  --c-neutral-10: var(--gray12);
-  --c-neutral-20: var(--gray11);
-  --c-neutral-30: var(--gray10);
-  --c-neutral-40: var(--gray9);
-  --c-neutral-50: var(--gray8);
-  --c-neutral-60: var(--gray7);
-  --c-neutral-70: var(--gray6);
-  --c-neutral-80: var(--gray5);
-  --c-neutral-90: var(--gray4);
-  --c-neutral-95: var(--gray3);
-  --c-neutral-99: var(--gray2);
-  --c-neutral-100: var(--gray1);
-
-  --c-neutral-variant-0: #000;
-  --c-neutral-variant-10: var(--mauve12);
-  --c-neutral-variant-20: var(--mauve11);
-  --c-neutral-variant-30: var(--mauve10);
-  --c-neutral-variant-40: var(--mauve9);
-  --c-neutral-variant-50: var(--mauve8);
-  --c-neutral-variant-60: var(--mauve7);
-  --c-neutral-variant-70: var(--mauve6);
-  --c-neutral-variant-80: var(--mauve5);
-  --c-neutral-variant-90: var(--mauve4);
-  --c-neutral-variant-95: var(--mauve3);
-  --c-neutral-variant-99: var(--mauve2);
-  --c-neutral-variant-100: var(--mauve1);
+  --c-neutral-variant-0: 0, 0%, 0%;
+  --c-neutral-variant-10: 244, 91.1%, 8.8%;
+  --c-neutral-variant-20: 254, 77.5%, 13.9%;
+  --c-neutral-variant-30: 254, 63.1%, 20.2%;
+  --c-neutral-variant-40: 254, 50.7%, 27.1%;
+  --c-neutral-variant-50: 254, 40.9%, 34.5%;
+  --c-neutral-variant-60: 254, 32.4%, 42.9%;
+  --c-neutral-variant-70: 255, 26.5%, 52.0%;
+  --c-neutral-variant-80: 254, 28.9%, 62.0%;
+  --c-neutral-variant-90: 254, 30.0%, 72.5%;
+  --c-neutral-variant-95: 254, 30.1%, 83.7%;
+  --c-neutral-variant-99: 240, 20.0%, 96.1%;
+  --c-neutral-variant-100: 0, 0%, 100.0%;
 }
 
 :root {

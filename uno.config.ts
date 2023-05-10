@@ -96,4 +96,7 @@ export default defineConfig({
     transformerDirectives(),
     transformerVariantGroup(),
   ],
+  rules: [
+    [/^content-space$/, () => ({ content: '" "' })],
+  ],
 })

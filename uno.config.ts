@@ -77,10 +77,7 @@ export default defineConfig({
       shadow: 'hsl(var(--c-shadow))',
       logo: {
         i: 'hsl(var(--c-logo-i))',
-        np: {
-          dark: 'hsl(var(--c-logo-np-dark))',
-          light: 'hsl(var(--c-logo-np-light))',
-        },
+        np: 'hsl(var(--c-logo-np))',
         rv: 'hsl(var(--c-logo-rv))',
         oe: 'hsl(var(--c-logo-oe))',
       },

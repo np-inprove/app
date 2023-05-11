@@ -9,4 +9,7 @@ export default defineNuxtConfig({
     '~/styles/colors.css',
     '~/styles/global.css',
   ],
+  devtools: {
+    enabled: true,
+  },
 })

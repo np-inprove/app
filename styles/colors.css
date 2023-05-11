@@ -93,6 +93,12 @@
   --c-neutral-variant-95: 254, 30.1%, 83.7%;
   --c-neutral-variant-99: 240, 20.0%, 96.1%;
   --c-neutral-variant-100: 0, 0%, 100.0%;
+
+  --c-logo-i: 5, 100%, 68%;
+  --c-logo-np-dark: 0, 0%, 100%;
+  --c-logo-np-light: 0, 0%, 0%;
+  --c-logo-rv: 48, 100%, 50%;
+  --c-logo-oe: 173, 100%, 43%;
 }
 
 :root {

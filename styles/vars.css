@@ -40,6 +40,11 @@
   
   --c-scrim: var(--c-neutral-0);
   --c-shadow: var(--c-neutral-0);
+
+  --c-logo-i: var(--c-logo-i);
+  --c-logo-np: var(--c-logo-np-light);
+  --c-logo-rv: var(--c-logo-rv);
+  --c-logo-oe: var(--c-logo-oe);
 }
 
 .dark {
@@ -84,4 +89,9 @@
   
   --c-scrim: var(--c-neutral-0);
   --c-shadow: var(--c-neutral-0);
+
+  --c-logo-i: var(--c-logo-i);
+  --c-logo-np: var(--c-logo-np-dark);
+  --c-logo-rv: var(--c-logo-rv);
+  --c-logo-oe: var(--c-logo-oe);
 }

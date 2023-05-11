@@ -75,6 +75,12 @@ export default defineConfig({
       },
       scrim: 'hsl(var(--c-scrim))',
       shadow: 'hsl(var(--c-shadow))',
+      logo: {
+        i: 'hsl(var(--c-logo-i))',
+        np: 'hsl(var(--c-logo-np))',
+        rv: 'hsl(var(--c-logo-rv))',
+        oe: 'hsl(var(--c-logo-oe))',
+      },
     },
   },
   shortcuts: [

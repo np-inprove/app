@@ -28,9 +28,9 @@ const labelClasses = [
   // Text styles
   'text-xs leading-tight text-on-surface-variant',
   // Before
-  'before:(content-space pointer-events-none mt-[6.5px] mr-1 box-border block h-1.5 w-2.5 rounded-tl-md border-t border-l border-outline transition-all)',
+  'before:(content-space pointer-events-none mt-[6.5px] mr-1 box-border block h-1.5 w-2.5 rounded-tl-md border-t-2 border-l-2 border-outline transition-all)',
   // After
-  'after:(content-space pointer-events-none mt-[6.5px] ml-1 box-border block h-1.5 w-2.5 flex-grow rounded-tr-md border-t border-r border-outline transition-all)',
+  'after:(content-space pointer-events-none mt-[6.5px] ml-1 box-border block h-1.5 w-2.5 flex-grow rounded-tr-md border-t-2 border-r-2 border-outline transition-all)',
   // Input placeholder shown
   'peer-placeholder-shown:(text-sm leading-[3.75] text-on-surface-variant before:border-transparent after:border-transparent)',
   // Input focused

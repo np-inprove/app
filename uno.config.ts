@@ -85,7 +85,7 @@ export default defineConfig({
   },
   shortcuts: [
     {
-      'btn-base': 'px-4 py-2 transition duration-150 rounded-xl',
+      'btn-base': 'px-4 py-2 transition duration-150 rounded-xl disabled:(opacity-12 cursor-not-allowed)',
       'btn-filled': 'btn-base text-on-primary bg-primary hover:(shadow-md)',
       'btn-outlined': 'btn-base text-primary hover:(bg-primary bg-opacity-08) border-1 border-outline',
       'btn-text': 'btn-base text-primary hover:(bg-primary bg-opacity-08) px-4 py-2',

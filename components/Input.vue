@@ -13,13 +13,13 @@ function onInput(event: Event) {
 
 const inputClasses = [
   // Basic styles
-  'h-full w-full border-2 border-on-surface-variant border-t-transparent text-sm rounded-lg bg-transparent px-3 py-2.5 outline outline-0',
+  'h-full w-full border border-on-surface-variant border-t-transparent text-sm rounded-[7px] bg-transparent px-3 py-2.5 outline outline-0 transition-all',
   // Disabled input field
   'disabled:(opacity-12)',
   // Focused input field
   'focus:(border-2 border-primary border-t-transparent outline-0)',
-  // Placeholder shown input field
-  'placeholder-shown:(border border-2 border-primary)',
+  // Placeholder shown input field, no idea why border-t is required
+  'placeholder-shown:(border border-primary border-t-primary)',
 ]
 
 const labelClasses = [
@@ -28,13 +28,13 @@ const labelClasses = [
   // Text styles
   'text-xs leading-tight text-on-surface-variant',
   // Before
-  'before:(content-space pointer-events-none mt-[6.5px] mr-1 box-border block h-1.5 w-2.5 rounded-tl-md border-t-2 border-l-2 border-outline transition-all)',
+  'before:(content-space pointer-events-none mt-[6.5px] mr-1 box-border block h-1.5 w-2.5 rounded-tl-md border-t border-l border-primary transition-all)',
   // After
-  'after:(content-space pointer-events-none mt-[6.5px] ml-1 box-border block h-1.5 w-2.5 flex-grow rounded-tr-md border-t-2 border-r-2 border-outline transition-all)',
+  'after:(content-space pointer-events-none mt-[6.5px] ml-1 box-border block h-1.5 w-2.5 flex-grow rounded-tr-md border-t border-r border-primary transition-all)',
   // Input placeholder shown
   'peer-placeholder-shown:(text-sm leading-[3.75] text-on-surface-variant before:border-transparent after:border-transparent)',
   // Input focused
-  'peer-focus:(text-xs leading-tight text-primary before:(border-t-2 border-l-2 border-primary) after:(border-t-2 border-r-2 border-primary))',
+  'peer-focus:(text-[11px] leading-tight text-primary before:(border-t-2 border-l-2 border-primary) after:(border-t-2 border-r-2 border-primary))',
   // Input disabled
   'peer-disabled:(before:border-transparent after:border-transparent opacity-12)',
 ]

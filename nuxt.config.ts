@@ -12,4 +12,9 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true,
   },
+  runtimeConfig: {
+    public: {
+      apiURL: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:5000',
+    },
+  },
 })

@@ -27,7 +27,7 @@ const items = [
 </script>
 
 <template>
-  <div h-full>
+  <div h-full flex="~ col">
     <nav>
       <div mx-auto container>
         <div flex items-center justify-between px5 py8>
@@ -81,8 +81,8 @@ const items = [
         </div>
       </div>
     </nav>
-    <main mx-auto container>
-      <div px5>
+    <main flex-1>
+      <div mx-auto h-full px5 container>
         <slot />
       </div>
     </main>

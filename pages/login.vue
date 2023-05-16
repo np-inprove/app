@@ -31,7 +31,7 @@ function login() {
       <br>
 
       <form flex="~ col gap-5" @submit.prevent="login">
-        <Input
+        <AppInput
           v-model="formData.email"
           :error="formData.error.email"
 
@@ -41,7 +41,7 @@ function login() {
           required
         />
 
-        <Input
+        <AppInput
           v-model="formData.password"
           :error="formData.error.password"
 

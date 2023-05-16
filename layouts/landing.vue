@@ -36,7 +36,7 @@ const items = [
           </NuxtLink>
 
           <Popover md:hidden>
-            <LazyColorModeButton />
+            <ColorModeButton />
 
             <PopoverButton ml-3 btn-outlined title="Open navigation menu" type="button">
               <div i-tabler-menu-2 text-xl />
@@ -80,7 +80,7 @@ const items = [
               {{ item.name }}
             </NuxtLink>
 
-            <LazyColorModeButton />
+            <ColorModeButton />
           </div>
         </div>
       </div>

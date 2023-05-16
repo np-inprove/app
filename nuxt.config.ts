@@ -18,6 +18,9 @@ export default defineNuxtConfig({
       apiURL: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:5000',
     },
   },
+  routeRules: {
+    '/': { prerender: true },
+  },
   colorMode: {
     preference: 'system',
     fallback: 'light',

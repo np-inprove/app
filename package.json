@@ -16,6 +16,7 @@
     "@headlessui/vue": "^1.7.13",
     "@iconify-json/tabler": "^1.1.74",
     "@nuxt/devtools": "^0.4.6",
+    "@nuxtjs/color-mode": "^3.2.0",
     "@types/node": "^18.16.5",
     "@unocss/eslint-config": "^0.51.12",
     "@unocss/nuxt": "^0.51.12",

@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   modules: [
     '@unocss/nuxt',
+    '@nuxtjs/color-mode',
   ],
   css: [
     '@unocss/reset/tailwind.css',
@@ -16,5 +17,12 @@ export default defineNuxtConfig({
     public: {
       apiURL: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:5000',
     },
+  },
+  colorMode: {
+    preference: 'system',
+    fallback: 'light',
+    classPrefix: '',
+    classSuffix: '',
+    storageKey: 'nuxt-color-mode',
   },
 })

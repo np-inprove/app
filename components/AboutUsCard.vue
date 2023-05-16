@@ -7,15 +7,17 @@ const props = defineProps({
 </script>
 
 <template>
-  <div mx-2 mb-5 basis-full border-2 border-primary-container rounded-md md:mb-0 md:p-5>
-    <div mt-5 flex items-center justify-center md:mt-0>
+  <div flex-1 border-2 border-outline-variant rounded-md p-5>
+    <div flex items-center justify-center md:mt-0>
       <img max-h-52 rounded-full :alt="props.name" :src="props.picture">
     </div>
-    <div mb-5 text-center md:mb-0>
+
+    <div text-center>
       <h1 p-2 text-lg font-bold>
         {{ props.name }}
       </h1>
-      <p pb-2>
+
+      <p>
         {{ props.title }}
       </p>
     </div>

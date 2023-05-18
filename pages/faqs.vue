@@ -30,7 +30,7 @@ const faqs = [
     link: '',
   },
   {
-    text: 'How do I reset my account password?',
+    text: 'Am I able to change my pet?',
     link: '',
   },
 ] satisfies Faq[]
@@ -41,11 +41,10 @@ const faqs = [
     <h1 p-5 text-center text-3xl>
       Frequently Asked Questions
     </h1>
-    <div>
-      Search Bar Here
-    </div>
-    <div class="w-full md:w-3/5" grid grid-cols-1 mt-5 gap-3 overflow-hidden border-2 border-outline rounded-3xl pb-3 text-left divide-y-2 divide-outline>
-      <FAQRedirect v-for="faq in faqs" v-bind="faq" :key="faq.text" />
+    <div class="w-full md:w-3/5" grid grid-cols-1 my-5 gap-3 overflow-hidden border-2 border-outline rounded-3xl pb-3 text-left divide-y-2 divide-outline>
+      <NuxtLink v-for="faq in faqs" v-bind="faq" :key="faq.text" px-3 pt-3>
+        {{ faq.text }}
+      </NuxtLink>
     </div>
   </div>
 </template>

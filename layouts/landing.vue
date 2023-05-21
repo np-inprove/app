@@ -26,8 +26,11 @@ const items = [
 ] satisfies Item[]
 
 const user = useUserStore()
-onBeforeMount(() => {
-  user.init()
+const headers = useRequestHeaders(['cookie'])
+
+useAsyncData(async () => {
+  // Preload user data for SSR
+  await user.init(headers.cookie)
 })
 </script>
 

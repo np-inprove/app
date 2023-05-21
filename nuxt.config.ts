@@ -12,12 +12,11 @@ export default defineNuxtConfig({
     '~/styles/global.css',
   ],
   devtools: {
-    enabled: true,
+    enabled: false,
   },
   runtimeConfig: {
     public: {
-      // This is the same as defined in nuxt.config.ts
-      apiUrl: (globalThis as any).NUXT_PUBLIC_API_URL ?? process.env.NUXT_PUBLIC_API_URL ?? 'http://localhost:3333',
+      apiUrl: 'http://localhost:3333',
     },
   },
   routeRules: {

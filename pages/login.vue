@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useUserStore } from '~/composables/user'
-
 definePageMeta({
   layout: 'landing',
 })
@@ -20,8 +18,7 @@ const user = useUserStore()
 async function login() {
   formData.loading = true
   try {
-    const res = await user.login(formData.email, formData.password)
-    console.log(res)
+    await user.login(formData.email, formData.password)
   }
   catch (e) {
     console.error(e)
@@ -36,6 +33,9 @@ async function login() {
       <h1 text-center text-2xl font-semibold>
         Login to iNProve
       </h1>
+
+      <!-- TODO: DEBUG REMOVE -->
+      <span>{{ user.email }}</span>
 
       <br>
 

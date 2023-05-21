@@ -1,7 +1,7 @@
 export default defineNuxtPlugin(() => {
   const {
     public: {
-      apiUrl = (globalThis as any).NUXT_PUBLIC_API_URL,
+      apiUrl = (globalThis as any).NUXT_PUBLIC_API_URL ?? 'http://localhost:3333',
     },
   } = useRuntimeConfig()
 

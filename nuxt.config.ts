@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
+    '@pinia/nuxt',
     '@unocss/nuxt',
     '@nuxtjs/color-mode',
   ],
@@ -15,7 +16,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiURL: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:5000',
+      // This is the same as defined in nuxt.config.ts
+      apiUrl: (globalThis as any).NUXT_PUBLIC_API_URL ?? process.env.NUXT_PUBLIC_API_URL ?? 'http://localhost:3333',
     },
   },
   routeRules: {

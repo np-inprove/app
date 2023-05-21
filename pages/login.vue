@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useUserStore } from '~/composables/user'
+
 definePageMeta({
   layout: 'landing',
 })
@@ -13,11 +15,18 @@ const formData = reactive({
   },
 })
 
-function login() {
+const user = useUserStore()
+
+async function login() {
   formData.loading = true
-  setTimeout(() => {
-    formData.loading = false
-  }, 1000)
+  try {
+    const res = await user.login(formData.email, formData.password)
+    console.log(res)
+  }
+  catch (e) {
+    console.error(e)
+  }
+  formData.loading = false
 }
 </script>
 

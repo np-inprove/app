@@ -24,6 +24,11 @@ const items = [
     to: '/login',
   },
 ] satisfies Item[]
+
+const user = useUserStore()
+onBeforeMount(() => {
+  user.init()
+})
 </script>
 
 <template>

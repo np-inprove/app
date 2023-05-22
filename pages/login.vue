@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'landing',
+  middleware: 'anon',
 })
 
 const formData = reactive({
@@ -40,7 +41,7 @@ async function login() {
       <br>
 
       <form flex="~ col gap-5" @submit.prevent="login">
-        <AppInput
+        <CommonInput
           v-model="formData.email"
           :error="formData.error.email"
 
@@ -50,7 +51,7 @@ async function login() {
           required
         />
 
-        <AppInput
+        <CommonInput
           v-model="formData.password"
           :error="formData.error.password"
 

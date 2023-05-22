@@ -1,22 +1,19 @@
 import { AUTHENTICATION_STATE_COOKIE_NAME } from './auth'
 
-export default defineNuxtRouteMiddleware((to) => {
+/**
+ * Unlike auth.ts, pages with this middleware will only allow access when the user is anonymous
+ */
+export default defineNuxtRouteMiddleware(() => {
   const authenticated = useCookie(AUTHENTICATION_STATE_COOKIE_NAME)
 
   if (process.server) {
-    if (!authenticated.value)
-      return navigateTo('/login')
-
-    if (authenticated.value === 'human')
+    if (authenticated.value)
       return navigateTo('/dashboard')
   }
   else {
     const user = useUserStore()
 
-    if (!user.authenticated)
-      return navigateTo('/login')
-
-    if (!user.godMode)
+    if (user.authenticated)
       return navigateTo('/dashboard')
   }
 })

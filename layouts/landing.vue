@@ -45,7 +45,7 @@ useAsyncData(async () => {
           </NuxtLink>
 
           <Popover md:hidden>
-            <ColorModeButton />
+            <CommonColorModeButton />
 
             <PopoverButton ml-3 btn-outlined title="Open navigation menu" type="button">
               <div i-tabler-menu-2 text-xl />
@@ -89,7 +89,7 @@ useAsyncData(async () => {
               {{ item.name }}
             </NuxtLink>
 
-            <ColorModeButton />
+            <CommonColorModeButton />
           </div>
         </div>
       </div>

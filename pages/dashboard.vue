@@ -1,12 +1,12 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'landing',
-  middleware: 'anon',
+  layout: 'app',
+  middleware: 'auth',
 })
 </script>
 
 <template>
   <div>
-    Landing page
+    this is the dashboard!
   </div>
 </template>

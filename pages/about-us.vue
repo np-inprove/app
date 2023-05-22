@@ -95,7 +95,7 @@ const authors = [
       Developers of iNProve
     </h2>
     <div grid="~ cols-1 md:cols-3 gap-5">
-      <AboutUsCard v-for="author in authors" v-bind="author" :key="author.name" />
+      <LandingAboutUsCard v-for="author in authors" v-bind="author" :key="author.name" />
     </div>
   </div>
 </template>

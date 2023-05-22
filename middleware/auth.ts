@@ -1,22 +1,16 @@
-import { AUTHENTICATION_STATE_COOKIE_NAME } from './auth'
+export const AUTHENTICATION_STATE_COOKIE_NAME = 'b'
 
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware(() => {
   const authenticated = useCookie(AUTHENTICATION_STATE_COOKIE_NAME)
 
   if (process.server) {
     if (!authenticated.value)
       return navigateTo('/login')
-
-    if (authenticated.value === 'human')
-      return navigateTo('/dashbaord')
   }
   else {
     const user = useUserStore()
 
     if (!user.authenticated)
       return navigateTo('/login')
-
-    if (!user.godMode)
-      return navigateTo('/dashboard')
   }
 })

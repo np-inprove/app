@@ -74,6 +74,9 @@ export const useUserStore = defineStore('user', () => {
     lastName.value = data.last_name
     email.value = data.email
 
+    if (data.god_mode)
+      godMode.value = data.god_mode
+
     if (data.points)
       points.value = data.points
 

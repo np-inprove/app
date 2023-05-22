@@ -1,3 +1,12 @@
+<script setup lang="ts">
+const user = useUserStore()
+
+const headers = useRequestHeaders(['cookie'])
+useAsyncData(async () => {
+  await user.init(headers.cookie)
+})
+</script>
+
 <template>
   <div h-full>
     <header>

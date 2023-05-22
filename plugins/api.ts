@@ -1,6 +1,8 @@
 export default defineNuxtPlugin(() => {
-  const e = useRequestEvent()
-  console.log(JSON.stringify(e.context.cloudflare), JSON.stringify(e.context.cf))
+  if (process.server) {
+    const e = useRequestEvent()
+    console.log(JSON.stringify(e.context.cloudflare), JSON.stringify(e.context.cf))
+  }
 
   const {
     public: {

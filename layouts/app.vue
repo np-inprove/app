@@ -4,6 +4,7 @@ const user = useUserStore()
 const headers = useRequestHeaders(['cookie'])
 useAsyncData(async () => {
   await user.init(headers.cookie)
+  return Promise.resolve(true)
 })
 </script>
 

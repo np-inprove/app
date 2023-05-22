@@ -1,11 +1,9 @@
 export default defineNuxtPlugin(() => {
   const {
     public: {
-      apiUrl = (globalThis as any).NUXT_PUBLIC_API_URL,
+      apiUrl = (global as any).NUXT_PUBLIC_API_URL,
     },
   } = useRuntimeConfig()
-
-  console.log('help', JSON.stringify(globalThis))
 
   const api = $fetch.create({
     baseURL: apiUrl,

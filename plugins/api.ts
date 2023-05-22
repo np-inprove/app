@@ -1,4 +1,7 @@
 export default defineNuxtPlugin(() => {
+  const e = useRequestEvent()
+  console.log(JSON.stringify(e.context.cloudflare), JSON.stringify(e.context.cf))
+
   const {
     public: {
       apiUrl = (global as any).NUXT_PUBLIC_API_URL,

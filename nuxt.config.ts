@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiUrl: '',
+      apiUrl: 'http://localhost:3333',
     },
   },
   colorMode: {

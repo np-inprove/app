@@ -1,19 +1,23 @@
 export default defineNuxtPlugin(() => {
-  if (process.server) {
+  const config = useRuntimeConfig()
+
+  const api = (() => {
+    if (process.client) {
+      return $fetch.create({
+        baseURL: config.public.apiUrl,
+        credentials: 'include',
+      })
+    }
+
     const e = useRequestEvent()
-    console.log(JSON.stringify(e.context.cloudflare), JSON.stringify(e.context.cf))
-  }
 
-  const {
-    public: {
-      apiUrl = (global as any).NUXT_PUBLIC_API_URL,
-    },
-  } = useRuntimeConfig()
+    const baseURL = e.context.cloudflare ? e.context.cloudflare.NUXT_PUBLIC_API_URL : config.public.apiUrl
 
-  const api = $fetch.create({
-    baseURL: apiUrl,
-    credentials: 'include',
-  })
+    return $fetch.create({
+      baseURL,
+      credentials: 'include',
+    })
+  })()
 
   return {
     provide: {

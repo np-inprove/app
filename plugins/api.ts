@@ -15,7 +15,6 @@ export default defineNuxtPlugin(() => {
 
     return $fetch.create({
       baseURL,
-      credentials: 'include',
     })
   })()
 

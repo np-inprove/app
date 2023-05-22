@@ -19,7 +19,7 @@
     "@nuxtjs/color-mode": "^3.2.0",
     "@pinia/nuxt": "^0.4.11",
     "@types/node": "^18.16.5",
-    "@unocss/eslint-config": "^0.51.12",
+    "@unocss/eslint-config": "^0.52.0",
     "@unocss/nuxt": "^0.52.0",
     "eslint": "8.39.0",
     "lint-staged": "^13.2.2",

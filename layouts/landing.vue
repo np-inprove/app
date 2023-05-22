@@ -29,14 +29,9 @@ const user = useUserStore()
 const headers = useRequestHeaders(['cookie'])
 
 useAsyncData(async () => {
-  // eslint-disable-next-line no-console
-  console.log('fetching user info 1')
   // Preload user data for SSR
   await user.init(headers.cookie)
-
-  // eslint-disable-next-line no-console
-  console.log('fetching user info 2')
-  return Promise.resolve(true) // Prevent refetch
+  return true // Prevent refetch
 })
 </script>
 

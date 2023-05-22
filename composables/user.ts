@@ -1,4 +1,5 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
+import type { FetchError } from 'ofetch'
 
 interface UserResponse {
   first_name: string
@@ -14,6 +15,7 @@ export const useUserStore = defineStore('user', () => {
   const { $api } = useNuxtApp()
 
   const isLoading = ref(true)
+  const error = ref('')
 
   const firstName = ref('')
   const lastName = ref('')
@@ -43,7 +45,8 @@ export const useUserStore = defineStore('user', () => {
       populate(res)
     }
     catch (e) {
-      console.error(e)
+      error.value = (e as FetchError).message
+      console.error('[composables/user.ts] failed to init store', e)
     }
   }
 

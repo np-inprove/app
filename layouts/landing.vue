@@ -31,7 +31,10 @@ const headers = useRequestHeaders(['cookie'])
 useAsyncData(async () => {
   // Preload user data for SSR
   await user.init(headers.cookie)
-  return true // Prevent refetch
+
+  // eslint-disable-next-line no-console
+  console.log('fetching user info')
+  return Promise.resolve(true) // Prevent refetch
 })
 </script>
 

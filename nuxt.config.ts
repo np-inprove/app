@@ -19,9 +19,6 @@ export default defineNuxtConfig({
       apiUrl: 'http://localhost:3333',
     },
   },
-  routeRules: {
-    '/': { prerender: true },
-  },
   colorMode: {
     preference: 'system',
     fallback: 'light',

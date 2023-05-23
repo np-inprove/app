@@ -7,22 +7,13 @@ definePageMeta({
 const formData = reactive({
   email: '',
   password: '',
-  error: {
-    email: '',
-    password: '',
-  },
 })
 
-const user = useUserStore()
+const auth = useAuthStore()
 
 async function login() {
-  try {
-    await user.login(formData.email, formData.password)
-    navigateTo('/dashboard')
-  }
-  catch (e) {
-    console.error(e)
-  }
+  await auth.login(formData.email, formData.password)
+  navigateTo('/dashboard')
 }
 </script>
 
@@ -38,7 +29,7 @@ async function login() {
       <form flex="~ col gap-5" @submit.prevent="login">
         <CommonInput
           v-model="formData.email"
-          :error="formData.error.email"
+          :error="auth.error?.fields?.email"
 
           label="Email"
           type="email"
@@ -48,7 +39,7 @@ async function login() {
 
         <CommonInput
           v-model="formData.password"
-          :error="formData.error.password"
+          :error="auth.error?.fields?.password"
 
           label="Password"
           type="password"
@@ -56,7 +47,7 @@ async function login() {
           required
         />
 
-        <button type="submit" :disabled="user.isLoading" self-center btn-filled>
+        <button type="submit" :disabled="auth.isLoading" self-center btn-filled>
           Login
         </button>
       </form>

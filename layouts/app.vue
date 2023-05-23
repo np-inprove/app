@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const user = useUserStore()
+const auth = useAuthStore()
 
 const headers = useRequestHeaders(['cookie'])
 useAsyncData(async () => {
-  await user.init(headers.cookie)
+  await auth.init(headers.cookie)
   return Promise.resolve(true)
 })
 </script>

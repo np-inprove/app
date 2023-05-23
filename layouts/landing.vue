@@ -25,12 +25,12 @@ const items = [
   },
 ] satisfies Item[]
 
-const user = useUserStore()
+const auth = useAuthStore()
 const headers = useRequestHeaders(['cookie'])
 
 useAsyncData(async () => {
   // Preload user data for SSR
-  await user.init(headers.cookie)
+  await auth.init(headers.cookie)
   return true // Prevent refetch
 })
 </script>

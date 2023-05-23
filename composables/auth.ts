@@ -1,7 +1,8 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import type { FetchError } from 'ofetch'
+import type { ValidationError } from './errors'
+import { parseError } from './errors'
 
-interface UserResponse {
+interface User {
   first_name: string
   last_name: string
   email: string
@@ -11,11 +12,13 @@ interface UserResponse {
   god_mode?: boolean
 }
 
-export const useUserStore = defineStore('user', () => {
+export const useAuthStore = defineStore('auth', () => {
   const { $api } = useNuxtApp()
 
   const isLoading = ref(true)
-  const error = ref('')
+  const error = ref<ValidationError>({
+    message: '',
+  })
 
   const firstName = ref('')
   const lastName = ref('')
@@ -35,7 +38,7 @@ export const useUserStore = defineStore('user', () => {
    */
   async function init(cookie?: string) {
     try {
-      const res = await $api<UserResponse>('/auth/whoami', {
+      const res = await $api<User>('/auth/whoami', {
         headers: cookie
           ? {
               cookie,
@@ -45,7 +48,7 @@ export const useUserStore = defineStore('user', () => {
       populate(res)
     }
     catch (e) {
-      error.value = (e as FetchError).message
+      error.value = parseError(e)
       console.error('[composables/user.ts] failed to init store', e)
     }
     isLoading.value = false
@@ -59,7 +62,7 @@ export const useUserStore = defineStore('user', () => {
   async function login(email: string, password: string) {
     isLoading.value = true
     try {
-      const res = await $api<UserResponse>('/auth/login', {
+      const res = await $api<User>('/auth/login', {
         method: 'POST',
         body: {
           email, password,
@@ -68,7 +71,7 @@ export const useUserStore = defineStore('user', () => {
       populate(res)
     }
     catch (e) {
-      error.value = (e as FetchError).message
+      error.value = parseError(e)
       console.error('[composables/user.ts] failed to login', e)
     }
     isLoading.value = false
@@ -78,7 +81,7 @@ export const useUserStore = defineStore('user', () => {
    * populate fills up the store with response data
    * @param data data to populate the store with
    */
-  function populate(data: UserResponse) {
+  function populate(data: User) {
     firstName.value = data.first_name
     lastName.value = data.last_name
     email.value = data.email
@@ -102,6 +105,8 @@ export const useUserStore = defineStore('user', () => {
 
   return {
     isLoading,
+    error,
+
     firstName,
     lastName,
     email,
@@ -118,4 +123,4 @@ export const useUserStore = defineStore('user', () => {
 })
 
 if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useAuthStore, import.meta.hot))

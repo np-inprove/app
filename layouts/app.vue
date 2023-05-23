@@ -85,7 +85,7 @@ useAsyncData(async () => {
             </NuxtLink>
 
             <ProfileButton />
-            <ColorModeButton />
+            <CommonColorModeButton />
           </div>
         </div>
       </div>

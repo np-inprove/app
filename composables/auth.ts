@@ -1,6 +1,4 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import type { ValidationError } from './errors'
-import { parseError } from './errors'
 
 interface User {
   first_name: string
@@ -14,11 +12,6 @@ interface User {
 
 export const useAuthStore = defineStore('auth', () => {
   const { $api } = useNuxtApp()
-
-  const isLoading = ref(true)
-  const error = ref<ValidationError>({
-    message: '',
-  })
 
   const firstName = ref('')
   const lastName = ref('')
@@ -35,6 +28,8 @@ export const useAuthStore = defineStore('auth', () => {
    * if the user is unauthenticated.
    *
    * init should be called in any root level layout (example: layouts/app.vue)
+   *
+   * @param cookie cookie to use for authentication
    */
   async function init(cookie?: string) {
     try {
@@ -48,10 +43,9 @@ export const useAuthStore = defineStore('auth', () => {
       populate(res)
     }
     catch (e) {
-      error.value = parseError(e)
       console.error('[composables/user.ts] failed to init store', e)
+      return parseError(e)
     }
-    isLoading.value = false
   }
 
   /**
@@ -60,7 +54,6 @@ export const useAuthStore = defineStore('auth', () => {
    * @param password password of the user
    */
   async function login(email: string, password: string) {
-    isLoading.value = true
     try {
       const res = await $api<User>('/auth/login', {
         method: 'POST',
@@ -71,10 +64,9 @@ export const useAuthStore = defineStore('auth', () => {
       populate(res)
     }
     catch (e) {
-      error.value = parseError(e)
       console.error('[composables/user.ts] failed to login', e)
+      return parseError(e)
     }
-    isLoading.value = false
   }
 
   /**
@@ -104,9 +96,6 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   return {
-    isLoading,
-    error,
-
     firstName,
     lastName,
     email,

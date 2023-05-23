@@ -7,7 +7,7 @@ export interface ErrorResponse {
 }
 
 export interface ValidationError {
-  message: string
+  message?: string
   fields?: Record<string, string>
 }
 

@@ -57,13 +57,21 @@ export const useUserStore = defineStore('user', () => {
    * @param password password of the user
    */
   async function login(email: string, password: string) {
-    const res = await $api<UserResponse>('/auth/login', {
-      method: 'POST',
-      body: {
-        email, password,
-      },
-    })
-    populate(res)
+    isLoading.value = true
+    try {
+      const res = await $api<UserResponse>('/auth/login', {
+        method: 'POST',
+        body: {
+          email, password,
+        },
+      })
+      populate(res)
+    }
+    catch (e) {
+      error.value = (e as FetchError).message
+      console.error('[composables/user.ts] failed to login', e)
+    }
+    isLoading.value = false
   }
 
   /**

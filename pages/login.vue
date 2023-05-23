@@ -7,7 +7,6 @@ definePageMeta({
 const formData = reactive({
   email: '',
   password: '',
-  loading: false,
   error: {
     email: '',
     password: '',
@@ -17,14 +16,13 @@ const formData = reactive({
 const user = useUserStore()
 
 async function login() {
-  formData.loading = true
   try {
     await user.login(formData.email, formData.password)
+    navigateTo('/dashboard')
   }
   catch (e) {
     console.error(e)
   }
-  formData.loading = false
 }
 </script>
 
@@ -34,9 +32,6 @@ async function login() {
       <h1 text-center text-2xl font-semibold>
         Login to iNProve
       </h1>
-
-      <!-- TODO: DEBUG REMOVE -->
-      <span>{{ user.email }}</span>
 
       <br>
 
@@ -61,7 +56,7 @@ async function login() {
           required
         />
 
-        <button type="submit" :disabled="formData.loading" self-center btn-filled>
+        <button type="submit" :disabled="user.isLoading" self-center btn-filled>
           Login
         </button>
       </form>

@@ -48,6 +48,7 @@ export const useUserStore = defineStore('user', () => {
       error.value = (e as FetchError).message
       console.error('[composables/user.ts] failed to init store', e)
     }
+    isLoading.value = false
   }
 
   /**

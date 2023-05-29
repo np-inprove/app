@@ -78,7 +78,7 @@ export const useAuthStore = defineStore('auth', () => {
    * @param password password of the user, min length of 6
    * @returns ValidationError | undefined
    */
-  async function register(firstName: string, lastName: string, email: string, password: string) {
+  async function register(firstName: string, lastName: string, email: string, password: string, confirm_password: string) {
     try {
       const res = await $api<User>('/auth/register', {
         method: 'POST',
@@ -87,9 +87,10 @@ export const useAuthStore = defineStore('auth', () => {
           last_name: lastName,
           email,
           password,
+          confirm_password,
         },
       })
-      populate(res)
+      // populate(res)
     }
     catch (e) {
       console.error('[composables/user.ts] failed to register', e)
@@ -136,6 +137,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     init,
     login,
+    register,
   }
 })
 

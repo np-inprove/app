@@ -1,5 +1,10 @@
 lockfileVersion: '6.0'
 
+dependencies:
+  '@iconify-json/material-symbols':
+    specifier: ^1.1.43
+    version: 1.1.43
+
 devDependencies:
   '@antfu/eslint-config':
     specifier: ^0.39.0
@@ -7,6 +12,9 @@ devDependencies:
   '@headlessui/vue':
     specifier: ^1.7.13
     version: 1.7.13(vue@3.3.2)
+  '@iconify-json/fluent-emoji':
+    specifier: ^1.1.13
+    version: 1.1.13
   '@iconify-json/tabler':
     specifier: ^1.1.74
     version: 1.1.75
@@ -784,6 +792,18 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
+  /@iconify-json/fluent-emoji@1.1.13:
+    resolution: {integrity: sha512-9tyClxWzrLwbfItv10/oUp3G7s5X+MUa0VN5P8nN2gmVg9Uy87HoZnDt3IRKNwbyqncXRr3p0VoWuv/Tg2jUCg==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/material-symbols@1.1.43:
+    resolution: {integrity: sha512-n2SVi5CNJfzQWtzohuwX1Kmhgf/0GVheEAf39Hp4Np8h04ba4qJavkpqYyBYu4jhNB4+NgsDNeMsiNTeXbRZ5A==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
+
   /@iconify-json/tabler@1.1.75:
     resolution: {integrity: sha512-xjqRSGXExigKe8gX6nuD07gjeUvGf3AqGQIkgGquf1x1UaCxrXT0JYcKlk9cZPEJo5aHQfZqyhrOBgFLO19Mag==}
     dependencies:
@@ -792,7 +812,6 @@ packages:
 
   /@iconify/types@2.0.0:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
-    dev: true
 
   /@iconify/utils@2.1.5:
     resolution: {integrity: sha512-6MvDI+I6QMvXn5rK9KQGdpEE4mmLTcuQdLZEiX5N+uZB+vc4Yw9K1OtnOgkl8mp4d9X0UrILREyZgF1NUwUt+Q==}

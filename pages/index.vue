@@ -4,106 +4,97 @@ definePageMeta({
   middleware: 'anon',
 })
 
-interface Colour {
+interface Card {
+  icon: string
   title: string
-  logo: string
+  description: string
 }
 
-const colourmode = [
+const cards = [
   {
-    title: 'iNProve Logo',
-    logo: '../_nuxt/assets/logos/small.svg',
+    icon: 'i-fluent-emoji-memo',
+    title: 'Plan Your Learning',
+    description: 'Share And Create Your Study Plan',
   },
   {
-    title: 'iNProve Logo',
-    logo: '../_nuxt/assets/logos/small-dark.svg',
+    icon: 'i-fluent-emoji-pancakes',
+    title: 'Participation Pancakes',
+    description: 'Praise your peers for helping!',
   },
-] satisfies Colour[]
+  {
+    icon: 'i-fluent-emoji-calendar',
+    title: 'Events',
+    description: 'Participate In Events Related To Your Modules',
+  },
+  {
+    icon: 'i-material-symbols-forum-outline-rounded',
+    title: 'Forum',
+    description: 'Chat, Learn And Share Your Notes With Your Peers',
+  },
+  {
+    icon: 'i-fluent-emoji-paw-prints',
+    title: 'Pets',
+    description: 'Take Care Of Pets Or Redeem Prizes As You Study And Help Your Peers',
+  },
+] satisfies Card[]
 
-// const modecolour = useColorMode()
-// const int = 0
-
-// if (modecolour.value === 'dark') {
-//   const int = 1
-// }
-// else {
-//   const int = 0
-// }
+const points = [
+  'Lorem ipsum dolor sit amet',
+  'Lorem ipsum dolor sit amet',
+  'Lorem ipsum dolor sit amet',
+] satisfies string[]
 </script>
 
 <template>
-  <div pb-5 md:pb-10>
-    <div h-full flex items-center justify-center p-5 py-2>
-      <!-- <img :src="colourmode[int].logo" alt="iNProve Logo" class="w-full md:w-4/5"> -->
-      <img src="~/assets/logos/small.svg" alt="iNProve Logo" class="w-full md:w-4/5">
+  <div flex flex-col gap-10 pb-30>
+    <div grid="~ cols-1 md:cols-2 gap-6 md:gap-10" class="min-h-[500px]">
+      <div flex flex-1 flex-col justify-center md:flex-grow-2>
+        <span class="leading-[4]">
+          <h1 text-4xl font-black lg:text-5xl>
+            A gamified learning platform
+          </h1>
+          <span text-xl font-semibold lg:text-3xl>
+            for students, by students
+          </span>
+        </span>
+
+        <span mt-5 text-lg>
+          <span v-for="point in points" :key="point">{{ point }}<br></span>
+        </span>
+      </div>
+
+      <div flex items-center justify-center>
+        <CommonAppLogo class="w-3/4" />
+      </div>
     </div>
-    <h1 h-full flex items-center justify-center p-5 py-2 font-black lg:text-3xl md:text-xl>
-      A Gamified Platform by the Students for the Students
-    </h1>
-    <div flex justify-center p-5>
-      <div i-tabler-arrow-big-down-lines m-0 h-30 w-30 py-2 md:m-9 />
-    </div>
-    <div flex flex-col>
-      <div grid grid-cols-2 gap-6>
-        <h1 col-span-2 col-start-1 flex justify-center font-black lg:text-3xl md:text-xl>
-          Features of iNProve
-        </h1>
-        <div flex flex-col justify-center md:flex-row>
-          <div i-fluent-emoji-memo h-30 w-30 py-2 pr-5 />
-          <div w-full flex flex-col md:w-60>
-            <p px-2 font-bold>
-              Plan Your Learning
-            </p>
-            <p px-2>
-              Share And Create Your Study Plan
-            </p>
-          </div>
-        </div>
-        <div flex flex-col justify-center md:flex-row>
-          <div i-fluent-emoji-pancakes h-30 w-30 py-2 pr-5 />
-          <div w-full flex flex-col md:w-60>
-            <p px-2 font-bold>
-              Participation Pancakes
-            </p>
-            <p px-2>
-              Be Awarded By Your Peers As You Contribute By Sharing
-            </p>
-          </div>
-        </div>
-        <div flex flex-col justify-center md:flex-row>
-          <div i-fluent-emoji-calendar h-30 w-30 py-2 pr-5 />
-          <div w-full flex flex-col md:w-60>
-            <p px-2 font-bold>
-              Events
-            </p>
-            <p px-2>
-              Participate In Events Related To Your Modules
-            </p>
-          </div>
-        </div>
-        <div flex flex-col justify-center md:flex-row>
-          <div i-material-symbols-forum-outline-rounded h-30 w-30 py-2 pr-5 />
-          <div w-full flex flex-col md:w-60>
-            <p px-2 font-bold>
-              Forum
-            </p>
-            <p px-2>
-              Chat, Learn And Share Your Notes With Your Peers
-            </p>
-          </div>
-        </div>
-        <div flex flex-col justify-center md:flex-row>
-          <div i-fluent-emoji-paw-prints h-30 w-30 py-2 pr-5 />
-          <div w-full flex flex-col md:w-60>
-            <p px-2 font-bold>
-              Pets
-            </p>
-            <p px-2>
-              Take Care Of Pets Or Redeem Prizes As You Study And Help Your Peers
-            </p>
+
+    <div i-tabler-arrow-big-down-lines mx-auto my-10 text-5xl md:text-9xl />
+
+    <section flex flex-col items-center>
+      <h2 text-3xl font-bold lg:text-3xl>
+        Features of iNProve
+      </h2>
+
+      <br>
+      <br>
+
+      <div grid="~ gap-6 cols-1 md:cols-2" justify-center>
+        <div v-for="card in cards" :key="card.title">
+          <div card-low flex flex-col gap-3 md:flex-row>
+            <div :class="card.icon" h-30 w-30 />
+
+            <div w-full flex flex-col md:w-60>
+              <h3 text-xl font-bold>
+                {{ card.title }}
+              </h3>
+
+              <p mt-2 text-lg>
+                {{ card.description }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>

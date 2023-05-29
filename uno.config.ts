@@ -89,6 +89,9 @@ export default defineConfig({
       'btn-filled': 'btn-base text-on-primary bg-primary hover:(shadow-md)',
       'btn-outlined': 'btn-base text-primary hover:(bg-primary bg-opacity-08) border-1 border-outline',
       'btn-text': 'btn-base text-primary hover:(bg-primary bg-opacity-08) px-4 py-2',
+
+      'card-base': 'p-6 rounded-3xl',
+      'card-low': 'card-base bg-surface-container-low',
     },
   ],
   presets: [

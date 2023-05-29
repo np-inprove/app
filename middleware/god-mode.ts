@@ -1,6 +1,6 @@
 import { AUTHENTICATION_STATE_COOKIE_NAME } from './auth'
 
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware(() => {
   const authenticated = useCookie(AUTHENTICATION_STATE_COOKIE_NAME)
 
   if (process.server) {
@@ -11,12 +11,12 @@ export default defineNuxtRouteMiddleware((to) => {
       return navigateTo('/dashboard')
   }
   else {
-    const user = useUserStore()
+    const auth = useAuthStore()
 
-    if (!user.authenticated)
+    if (!auth.authenticated)
       return navigateTo('/login')
 
-    if (!user.godMode)
+    if (!auth.godMode)
       return navigateTo('/dashboard')
   }
 })

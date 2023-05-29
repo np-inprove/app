@@ -1,7 +1,6 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import type { FetchError } from 'ofetch'
 
-interface UserResponse {
+interface User {
   first_name: string
   last_name: string
   email: string
@@ -11,11 +10,8 @@ interface UserResponse {
   god_mode?: boolean
 }
 
-export const useUserStore = defineStore('user', () => {
+export const useAuthStore = defineStore('auth', () => {
   const { $api } = useNuxtApp()
-
-  const isLoading = ref(true)
-  const error = ref('')
 
   const firstName = ref('')
   const lastName = ref('')
@@ -32,10 +28,12 @@ export const useUserStore = defineStore('user', () => {
    * if the user is unauthenticated.
    *
    * init should be called in any root level layout (example: layouts/app.vue)
+   *
+   * @param cookie cookie to use for authentication
    */
   async function init(cookie?: string) {
     try {
-      const res = await $api<UserResponse>('/auth/whoami', {
+      const res = await $api<User>('/auth/whoami', {
         headers: cookie
           ? {
               cookie,
@@ -45,8 +43,8 @@ export const useUserStore = defineStore('user', () => {
       populate(res)
     }
     catch (e) {
-      error.value = (e as FetchError).message
       console.error('[composables/user.ts] failed to init store', e)
+      return parseError(e)
     }
   }
 
@@ -56,20 +54,54 @@ export const useUserStore = defineStore('user', () => {
    * @param password password of the user
    */
   async function login(email: string, password: string) {
-    const res = await $api<UserResponse>('/auth/login', {
-      method: 'POST',
-      body: {
-        email, password,
-      },
-    })
-    populate(res)
+    try {
+      const res = await $api<User>('/auth/login', {
+        method: 'POST',
+        body: {
+          email, password,
+        },
+      })
+      populate(res)
+    }
+    catch (e) {
+      console.error('[composables/user.ts] failed to login', e)
+      return parseError(e)
+    }
+  }
+
+  /**
+   * register creates a new user account and populates the store
+   *
+   * @param firstName first name of the user
+   * @param lastName last name of the user
+   * @param email email of the user, must be a domain which is registered in an institution
+   * @param password password of the user, min length of 6
+   * @returns ValidationError | undefined
+   */
+  async function register(firstName: string, lastName: string, email: string, password: string) {
+    try {
+      const res = await $api<User>('/auth/register', {
+        method: 'POST',
+        body: {
+          first_name: firstName,
+          last_name: lastName,
+          email,
+          password,
+        },
+      })
+      populate(res)
+    }
+    catch (e) {
+      console.error('[composables/user.ts] failed to register', e)
+      return parseError(e)
+    }
   }
 
   /**
    * populate fills up the store with response data
    * @param data data to populate the store with
    */
-  function populate(data: UserResponse) {
+  function populate(data: User) {
     firstName.value = data.first_name
     lastName.value = data.last_name
     email.value = data.email
@@ -92,7 +124,6 @@ export const useUserStore = defineStore('user', () => {
   }
 
   return {
-    isLoading,
     firstName,
     lastName,
     email,
@@ -109,4 +140,4 @@ export const useUserStore = defineStore('user', () => {
 })
 
 if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useAuthStore, import.meta.hot))

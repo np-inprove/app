@@ -1,28 +1,32 @@
 <script setup lang="ts">
+import type { ValidationError } from '~/utils/error'
+
 definePageMeta({
   layout: 'landing',
   middleware: 'anon',
 })
 
-const formData = reactive({
+const formData = reactive<{
+  email: string
+  password: string
+  error: ValidationError
+  isLoading: boolean
+}>({
   email: '',
   password: '',
-  error: {
-    email: '',
-    password: '',
-  },
+  error: {},
+  isLoading: false,
 })
 
-const user = useUserStore()
+const auth = useAuthStore()
 
 async function login() {
-  try {
-    await user.login(formData.email, formData.password)
-    navigateTo('/dashboard')
-  }
-  catch (e) {
-    console.error(e)
-  }
+  formData.isLoading = true
+  const err = await auth.login(formData.email, formData.password)
+  if (!err)
+    return navigateTo('/dashboard')
+  formData.error = err
+  formData.isLoading = false
 }
 </script>
 
@@ -38,7 +42,7 @@ async function login() {
       <form flex="~ col gap-5" @submit.prevent="login">
         <CommonInput
           v-model="formData.email"
-          :error="formData.error.email"
+          :error="formData.error?.fields?.email"
 
           label="Email"
           type="email"
@@ -48,7 +52,7 @@ async function login() {
 
         <CommonInput
           v-model="formData.password"
-          :error="formData.error.password"
+          :error="formData.error?.fields?.password"
 
           label="Password"
           type="password"
@@ -56,7 +60,7 @@ async function login() {
           required
         />
 
-        <button type="submit" :disabled="user.isLoading" self-center btn-filled>
+        <button type="submit" :disabled="formData.isLoading" self-center btn-filled>
           Login
         </button>
       </form>

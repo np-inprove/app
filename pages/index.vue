@@ -20,21 +20,22 @@ const colourmode = [
   },
 ] satisfies Colour[]
 
-const modecolour = useColorMode()
-const int = 0
+// const modecolour = useColorMode()
+// const int = 0
 
-if (modecolour.value === 'dark') {
-  const int = 1
-}
-else {
-  const int = 0
-}
+// if (modecolour.value === 'dark') {
+//   const int = 1
+// }
+// else {
+//   const int = 0
+// }
 </script>
 
 <template>
   <div pb-5 md:pb-10>
     <div h-full flex items-center justify-center p-5 py-2>
-      <img :src="colourmode[int].logo" alt="iNProve Logo" class="w-full md:w-4/5">
+      <!-- <img :src="colourmode[int].logo" alt="iNProve Logo" class="w-full md:w-4/5"> -->
+      <img src="/assets/logos/small.svg" alt="iNProve Logo" class="w-full md:w-4/5">
     </div>
     <h1 h-full flex items-center justify-center p-5 py-2 font-black lg:text-3xl md:text-xl>
       A Gamified Platform by the Students for the Students

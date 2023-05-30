@@ -35,7 +35,7 @@ useAsyncData(async () => {
       <div mx-auto container>
         <div flex items-center justify-between px5 py8>
           <NuxtLink to="/">
-            <img h-8 src="~/assets/logos/small.webp" alt="iNProve">
+            <CommonAppLogo h-8 />
           </NuxtLink>
 
           <Popover md:hidden>
@@ -55,7 +55,7 @@ useAsyncData(async () => {
                 <div gap-2 rounded-lg bg-surface px-2 py-3 shadow-lg ring ring-1 ring-opacity-5>
                   <div mb-3 flex="~ gap-3" justify-between>
                     <NuxtLink to="/" @click="close">
-                      <img m-3 h-8 src="~/assets/logos/small.webp" alt="iNProve">
+                      <CommonAppLogo m-3 h-8 />
                     </NuxtLink>
 
                     <div>

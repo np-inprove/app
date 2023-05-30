@@ -7,16 +7,16 @@ definePageMeta({
 })
 
 const formData = reactive<{
-  firstname: string
-  lastname: string
+  firstName: string
+  lastName: string
   email: string
   password: string
   confirmPassword: string
   error: ValidationError
   isLoading: boolean
 }>({
-  firstname: '',
-  lastname: '',
+  firstName: '',
+  lastName: '',
   email: '',
   password: '',
   confirmPassword: '',
@@ -24,15 +24,17 @@ const formData = reactive<{
   isLoading: false,
 })
 
+const noMatchErr = computed(() => (formData.password !== formData.confirmPassword ? 'Password does not match' : ''))
+
 const auth = useAuthStore()
 
 async function register() {
   formData.isLoading = true
-  // if (formData.password !== formData.confirmpassword)
-  //   return formData.error = err
-  const err = await auth.register(formData.firstname, formData.lastname, formData.email, formData.password, formData.confirmPassword)
+  if (noMatchErr)
+    return formData.isLoading = false
+  const err = await auth.register(formData.firstName, formData.lastName, formData.email, formData.password)
   if (!err)
-    return navigateTo('/login')
+    return navigateTo('/dashboard')
   formData.error = err
   formData.isLoading = false
 }
@@ -47,7 +49,7 @@ async function register() {
       <br>
       <form flex="~ col gap-5" @submit.prevent="register">
         <CommonInput
-          v-model="formData.firstname"
+          v-model="formData.firstName"
           :error="formData.error?.fields?.firstname"
 
           label="First Name"
@@ -57,7 +59,7 @@ async function register() {
         />
 
         <CommonInput
-          v-model="formData.lastname"
+          v-model="formData.lastName"
           :error="formData.error?.fields?.lastname"
 
           label="Last Name"
@@ -78,7 +80,7 @@ async function register() {
 
         <CommonInput
           v-model="formData.password"
-          :error="formData.error?.fields?.password"
+          :error="noMatchErr || formData.error?.fields?.password "
 
           label="Password"
           type="password"
@@ -88,7 +90,7 @@ async function register() {
 
         <CommonInput
           v-model="formData.confirmPassword"
-          :error="formData.error?.fields?.confirmPassword"
+          :error="noMatchErr || formData.error?.fields?.confirmPassword"
 
           label="Confirm Password"
           type="password"

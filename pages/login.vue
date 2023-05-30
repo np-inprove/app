@@ -36,9 +36,7 @@ async function login() {
       <h1 text-center text-2xl font-semibold>
         Login to iNProve
       </h1>
-
       <br>
-
       <form flex="~ col gap-5" @submit.prevent="login">
         <CommonInput
           v-model="formData.email"
@@ -64,6 +62,11 @@ async function login() {
           Login
         </button>
       </form>
+      <p flex justify-center pt-4>
+        <NuxtLink to="/register" btn-text>
+          Don't have an account? Register here
+        </NuxtLink>
+      </p>
     </div>
   </div>
 </template>

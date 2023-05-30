@@ -37,12 +37,6 @@ const cards = [
     description: 'Take Care Of Pets Or Redeem Prizes As You Study And Help Your Peers',
   },
 ] satisfies Card[]
-
-const points = [
-  'Lorem ipsum dolor sit amet',
-  'Lorem ipsum dolor sit amet',
-  'Lorem ipsum dolor sit amet',
-] satisfies string[]
 </script>
 
 <template>
@@ -57,18 +51,12 @@ const points = [
             for students, by students
           </span>
         </span>
-
-        <span mt-5 text-lg>
-          <span v-for="point in points" :key="point">{{ point }}<br></span>
-        </span>
       </div>
 
       <div flex items-center justify-center>
         <CommonAppLogo class="w-3/4" />
       </div>
     </div>
-
-    <div i-tabler-arrow-big-down-lines mx-auto my-10 text-5xl md:text-9xl />
 
     <section flex flex-col items-center>
       <h2 text-3xl font-bold lg:text-3xl>
@@ -80,7 +68,7 @@ const points = [
 
       <div grid="~ gap-6 cols-1 md:cols-2" justify-center>
         <div v-for="card in cards" :key="card.title">
-          <div card-low flex flex-col gap-3 md:flex-row>
+          <div flex flex-col gap-3 card-low md:flex-row>
             <div :class="card.icon" h-30 w-30 />
 
             <div w-full flex flex-col md:w-60>

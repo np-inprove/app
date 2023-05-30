@@ -29,9 +29,9 @@ const noMatchErr = computed(() => (formData.password !== formData.confirmPasswor
 const auth = useAuthStore()
 
 async function register() {
+  if (noMatchErr.value)
+    return
   formData.isLoading = true
-  if (noMatchErr)
-    return formData.isLoading = false
   const err = await auth.register(formData.firstName, formData.lastName, formData.email, formData.password)
   if (!err)
     return navigateTo('/dashboard')

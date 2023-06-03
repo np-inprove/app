@@ -1,108 +1,115 @@
 <script setup lang="ts">
+import type { ValidationError } from '~/utils/error'
+
 definePageMeta({
   layout: 'app',
   middleware: 'god-mode',
 })
 
-const institutions = useInstitutionStore()
+const institution = useInstitutionStore()
 const headers = useRequestHeaders(['cookie'])
 useAsyncData(async () => {
-  await institutions.init(headers.cookie)
+  await institution.init(headers.cookie)
   return true
 })
 
-const editFormData = ref(null)
-
-const formData = reactive({
+const initFormData = {
   name: '',
   shortName: '',
   adminDomain: '',
   studentDomain: '',
-})
+  isLoading: false,
+  error: {},
+}
 
-let message = ''
+const mode = ref<'create' | 'edit'>('create')
+const formData = ref<{
+  name: string
+  shortName: string
+  adminDomain: string
+  studentDomain: string
+  isLoading: boolean
+  error: ValidationError
+}>(initFormData)
 
-function showMessage() {
-  if (!editFormData.value)
-    message = 'Create Institution'
+function toggleEdit(institution: Institution) {
+  mode.value = 'edit'
+  formData.value = { ...formData.value, ...institution }
+}
 
+function toggleCreate() {
+  mode.value = 'create'
+  formData.value = initFormData
+}
+
+async function submit() {
+  if (mode.value === 'create')
+    return await create()
   else
-    message = 'Edit Institution'
-
-  return message
+    return await del()
 }
 
-function editInstitution(Institution) {
-  editFormData.value = Institution
+async function create() {
+  const err = await institution.create(formData.value.name, formData.value.shortName, formData.value.adminDomain, formData.value.studentDomain)
+  if (err)
+    formData.value.error = err
 }
 
-function createInstitution() {
-  editFormData.value = null
-}
-
-async function addInstitution() {
-  const inst = await god.create(formData.name, formData.shortName, formData.adminDomain, formData.studentDomain)
-}
-
-async function deleteInstitution() {
-  const del = await god.del(editFormData.value.shortName)
+async function del() {
+  const err = await institution.del(formData.value.shortName)
+  if (err)
+    formData.value.error = err
 }
 </script>
 
 <template>
   <div>
-    <div grid="~ cols-1 md:cols-3 gap-2">
-      <div self-start grid="~ gap-2">
-        <div flex justify-between>
-          <h2>
+    <div flex flex-col gap-5 lg:flex-row>
+      <div flex-1>
+        <div mb-5 flex justify-between>
+          <h2 text-2xl font-semibold>
             Institutions
           </h2>
-          <button btn-filled @click="createInstitution">
+
+          <button btn-filled @click="toggleCreate">
             Create
           </button>
         </div>
 
-        <div
-          v-for="inst in god.institutions" :key="inst.name" flex-1 rounded-md bg-surface-container p-3
-          hover:bg-surface-container-highest @click="editInstitution(inst)"
-        >
-          {{ inst.name }}
+        <div flex="~ gap-2 col">
+          <div
+            v-for="inst in institution.institutions" :key="inst.name"
+            rounded-lg px-4 py-3
+            :class="[inst.shortName === formData.shortName ? 'card' : 'card-low']"
+            @click="toggleEdit(inst)"
+          >
+            <span>
+              {{ inst.name }}
+            </span>
+          </div>
         </div>
       </div>
 
-      <div grid="col-span-2">
-        <h2 pr-3>
-          {{ showMessage() }}
-        </h2>
-        <button @click="editFormData = null" />
-        <div v-if="!editFormData">
-          <form @submit.prevent="addInstitution">
-            <div flex flex-col space-y-2>
+      <div flex-grow-2>
+        <h3 text-lg font-semibold>
+          <span v-if="mode === 'create'">
+            Create Institution
+          </span>
+          <span v-else>
+            Edit Institution
+          </span>
+        </h3>
+
+        <div mt-5>
+          <form @submit.prevent="submit">
+            <div flex flex-col gap-5>
               <CommonInput v-model="formData.name" label="Institution Name" type="text" />
-              <CommonInput v-model="formData.shortName" max-w-md label="Institution Short Name" type="text" />
-              <CommonInput v-model="formData.adminDomain" max-w-md label="Admin Domain Name" type="text" />
-              <CommonInput v-model="formData.studentDomain" max-w-md label="Student Domain Name" type="text" />
-              <button max-w-fit btn-filled type="submit">
-                Add Institution
+              <CommonInput v-model="formData.shortName" label="Institution Short Name" type="text" />
+              <CommonInput v-model="formData.adminDomain" label="Admin Domain Name" type="text" />
+              <CommonInput v-model="formData.studentDomain" label="Student Domain Name" type="text" />
+              <button self-start btn-filled type="submit">
+                Save changes
               </button>
-            </div>
-          </form>
-        </div>
-        <div v-else>
-          <form @submit.prevent="editInstitution">
-            <div flex flex-col space-y-2>
-              <CommonInput v-model="editFormData.name" label="Institution Name" type="text" />
-              <CommonInput v-model="editFormData.shortName" label="Institution Short Name" type="text" />
-              <CommonInput v-model="editFormData.adminDomain" label="Admin Domain Name" type="text" />
-              <CommonInput v-model="editFormData.studentDomain" label="Student Domain Name" type="text" />
-              <div flex flex-row gap-x-2 py-3>
-                <button max-w-fit btn-filled type="submit">
-                  Update Institution
-                </button>
-                <button max-w-fit btn-filled @click="deleteInstitution">
-                  Delete
-                </button>
-              </div>
             </div>
           </form>
         </div>

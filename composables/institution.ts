@@ -1,13 +1,5 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
-interface Institution {
-  id: number
-  name: string
-  short_name: string
-  admin_domain: string
-  student_domain: string
-}
-
 export const useInstitutionStore = defineStore('institution', () => {
   const { $api } = useNuxtApp()
 
@@ -51,9 +43,9 @@ export const useInstitutionStore = defineStore('institution', () => {
         method: 'POST',
         body: {
           name,
-          short_name: shortName,
-          admin_domain: adminDomain,
-          student_domain: studentDomain,
+          shortName,
+          adminDomain,
+          studentDomain,
         },
       })
       institutions.value.push(res)
@@ -76,7 +68,8 @@ export const useInstitutionStore = defineStore('institution', () => {
       await $api<Institution>(`/institutions/${shortName}`, {
         method: 'DELETE',
       })
-      institutions.value = institutions.value.filter(({ short_name }) => short_name !== shortName)
+
+      institutions.value = institutions.value.filter(inst => inst.shortName !== shortName)
     }
     catch (e) {
       console.error('[composables/institution.ts] failed to delete institution', e)

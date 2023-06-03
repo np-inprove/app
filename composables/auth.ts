@@ -1,15 +1,5 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
-interface User {
-  first_name: string
-  last_name: string
-  email: string
-  points?: number
-  points_awarded_count?: number
-  points_awarded_reset_time?: string
-  god_mode?: boolean
-}
-
 export const useAuthStore = defineStore('auth', () => {
   const { $api } = useNuxtApp()
 
@@ -83,8 +73,8 @@ export const useAuthStore = defineStore('auth', () => {
       const res = await $api<User>('/auth/register', {
         method: 'POST',
         body: {
-          first_name: firstName,
-          last_name: lastName,
+          firstName,
+          lastName,
           email,
           password,
         },
@@ -102,21 +92,21 @@ export const useAuthStore = defineStore('auth', () => {
    * @param data data to populate the store with
    */
   function populate(data: User) {
-    firstName.value = data.first_name
-    lastName.value = data.last_name
+    firstName.value = data.firstName
+    lastName.value = data.lastName
     email.value = data.email
 
-    if (data.god_mode)
-      godMode.value = data.god_mode
+    if (data.godMode)
+      godMode.value = data.godMode
 
     if (data.points)
       points.value = data.points
 
-    if (data.points_awarded_count)
-      pointsAwardedCount.value = data.points_awarded_count
+    if (data.pointsAwardedCount)
+      pointsAwardedCount.value = data.pointsAwardedCount
 
-    if (data.points_awarded_reset_time) {
-      const d = new Date(data.points_awarded_reset_time)
+    if (data.pointsAwardedResetTime) {
+      const d = new Date(data.pointsAwardedResetTime)
       if (d.getFullYear() !== 1) { // Zero value in Go time.TIme
         pointsAwardedResetTime.value = d
       }

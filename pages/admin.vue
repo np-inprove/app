@@ -4,11 +4,11 @@ definePageMeta({
   middleware: 'god-mode',
 })
 
-const god = useGodStore()
+const institutions = useInstitutionStore()
 const headers = useRequestHeaders(['cookie'])
 
 useAsyncData(async () => {
-  await god.init(headers.cookie)
+  await institutions.init(headers.cookie)
   return true
 })
 </script>

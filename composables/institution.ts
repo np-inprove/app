@@ -8,7 +8,7 @@ interface Institution {
   student_domain: string
 }
 
-export const useGodStore = defineStore('god', () => {
+export const useInstitutionStore = defineStore('institution', () => {
   const { $api } = useNuxtApp()
 
   const institutions = ref<Institution[]>([])
@@ -21,7 +21,7 @@ export const useGodStore = defineStore('god', () => {
    */
   async function init(cookie?: string) {
     try {
-      const res = await $api<Institution[]>('/god/institutions', {
+      const res = await $api<Institution[]>('/institutions', {
         headers: cookie
           ? {
               cookie,
@@ -31,7 +31,7 @@ export const useGodStore = defineStore('god', () => {
       institutions.value = res
     }
     catch (e) {
-      console.error('[composables/god.ts] failed to init store', e)
+      console.error('[composables/institution.ts] failed to init store', e)
       return parseError(e)
     }
   }
@@ -47,7 +47,7 @@ export const useGodStore = defineStore('god', () => {
    */
   async function create(name: string, shortName: string, adminDomain: string, studentDomain: string) {
     try {
-      const res = await $api<Institution>('/god/institutions', {
+      const res = await $api<Institution>('/institutions', {
         method: 'POST',
         body: {
           name,
@@ -59,7 +59,7 @@ export const useGodStore = defineStore('god', () => {
       institutions.value.push(res)
     }
     catch (e) {
-      console.error('[composables/god.ts] failed to create institution', e)
+      console.error('[composables/institution.ts] failed to create institution', e)
       return parseError(e)
     }
   }
@@ -73,13 +73,13 @@ export const useGodStore = defineStore('god', () => {
    */
   async function del(shortName: string) {
     try {
-      await $api<Institution>(`/god/institutions/${shortName}`, {
+      await $api<Institution>(`/institutions/${shortName}`, {
         method: 'DELETE',
       })
       institutions.value = institutions.value.filter(({ short_name }) => short_name !== shortName)
     }
     catch (e) {
-      console.error('[composables/god.ts] failed to delete institution', e)
+      console.error('[composables/institution.ts] failed to delete institution', e)
       return parseError(e)
     }
   }

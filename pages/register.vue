@@ -42,71 +42,67 @@ async function register() {
 
 <template>
   <div h-full flex items-center justify-center>
-    <div class="mb-40 min-w-[350px] rounded-xl bg-surface-container-low p-6 md:(min-w-[400px] p-10)">
-      <h1 text-center text-2xl font-semibold>
-        Register for iNProve
-      </h1>
-      <br>
-      <form flex="~ col gap-5" @submit.prevent="register">
-        <CommonInput
-          v-model="formData.firstName"
-          :error="formData.error?.fields?.firstname"
+    <Card class="mb-40 min-w-[350px] rounded-xl p-6 md:(min-w-[400px] p-10)">
+      <template #header>
+        <h1 text-center text-2xl font-semibold>
+          Register for iNProve
+        </h1>
+      </template>
+      <template #content>
+        <form flex="~ col gap-5" @submit.prevent="register">
+          <div>
+            <span class="p-float-label">
+              <InputText id="firstName" v-model="formData.firstName" type="text" required w-full />
+              <label for="firstName">First name</label>
+            </span>
+            <small class="p-error">{{ formData.error?.fields?.firstname || '&nbsp;' }}</small>
+          </div>
 
-          label="First Name"
-          type="text"
-          name="firstname"
-          required
-        />
+          <div>
+            <span class="p-float-label">
+              <InputText id="lastName" v-model="formData.lastName" type="text" required class="w-full" />
+              <label for="lastName">Last name</label>
+            </span>
+            <small class="p-error">{{ formData.error?.fields?.lastName || '&nbsp;' }}</small>
+          </div>
 
-        <CommonInput
-          v-model="formData.lastName"
-          :error="formData.error?.fields?.lastname"
+          <div>
+            <span class="p-float-label">
+              <InputText id="email" v-model="formData.email" type="email" required class="w-full" />
+              <label for="email">Email</label>
+            </span>
+            <small class="p-error">{{ formData.error?.fields?.email || '&nbsp;' }}</small>
+          </div>
 
-          label="Last Name"
-          type="text"
-          name="lastname"
-          required
-        />
+          <div>
+            <span class="p-float-label">
+              <InputText id="password" v-model="formData.password" type="password" required class="w-full" />
+              <label for="password">Password</label>
+            </span>
+            <small class="p-error">{{ formData.error?.fields?.password || '&nbsp;' }}</small>
+          </div>
 
-        <CommonInput
-          v-model="formData.email"
-          :error="formData.error?.fields?.email"
+          <div>
+            <span class="p-float-label">
+              <InputText id="confirmPassword" v-model="formData.confirmPassword" type="password" required
+                class="w-full" />
+              <label for="confirmPassword">Confirm password</label>
+            </span>
+            <small class="p-error">{{ formData.error?.fields?.confirmPassword || '&nbsp;' }}</small>
+          </div>
 
-          label="Email"
-          type="email"
-          name="Email"
-          required
-        />
-
-        <CommonInput
-          v-model="formData.password"
-          :error="noMatchErr || formData.error?.fields?.password "
-
-          label="Password"
-          type="password"
-          name="Password"
-          required
-        />
-
-        <CommonInput
-          v-model="formData.confirmPassword"
-          :error="noMatchErr || formData.error?.fields?.confirmPassword"
-
-          label="Confirm Password"
-          type="password"
-          name="confirmpassword"
-          required
-        />
-
-        <button type="submit" :disabled="formData.isLoading" self-center btn-filled>
-          Register
-        </button>
-      </form>
-      <p flex justify-center pt-4>
-        <NuxtLink to="/login" btn-text>
-          Already have an account? Login now
-        </NuxtLink>
-      </p>
-    </div>
+          <Button type="submit" :disabled="formData.isLoading" self-center>
+            Register
+          </Button>
+        </form>
+        <p flex justify-center pt-4>
+          <NuxtLink to="/login">
+            <Button link aria-label="Login now">
+              Already have an account? Login now
+            </Button>
+          </NuxtLink>
+        </p>
+      </template>
+    </Card>
   </div>
 </template>

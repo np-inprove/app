@@ -8,12 +8,14 @@ const profile = ({
 </script>
 
 <template>
-  <NuxtLink text-lg btn-text title="View Profile" type="button" to="/login">
-    <div flex>
-      {{ profile.name }}
-      <div pl-3>
-        <img max-h-7 rounded-full :alt="profile.name" :src="profile.picture">
+  <NuxtLink text-lg title="View Profile" type="button" to="/login">
+    <Button link>
+      <div flex>
+        {{ profile.name }}
+        <div pl-3>
+          <img max-h-7 rounded-full :alt="profile.name" :src="profile.picture">
+        </div>
       </div>
-    </div>
+    </Button>
   </NuxtLink>
 </template>

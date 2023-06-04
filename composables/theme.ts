@@ -24,12 +24,14 @@ export const useThemeStore = defineStore('theme', () => {
 
   // This must be set as a Link in the HTML head
   const link = ref('/themes/mdc-light-deeppurple/theme.css')
+  const preload = ref('/themes/mdc-dark-deeppurple/theme.css')
 
   function init() {
     if (cookie.value) {
       if (Object.keys(toggleLinkMap).includes(cookie.value)) {
         mode.value = cookie.value
-        link.value = modeToLinkMap[cookie.value]
+        link.value = modeToLinkMap[mode.value]
+        preload.value = toggleLinkMap[mode.value]
       }
     }
   }
@@ -38,10 +40,11 @@ export const useThemeStore = defineStore('theme', () => {
     link.value = toggleLinkMap[mode.value]
     cookie.value = toggleModeMap[mode.value]
     mode.value = toggleModeMap[mode.value]
+    preload.value = toggleLinkMap[mode.value]
   }
 
   return {
-    link, mode, init, toggle,
+    link, preload, mode, init, toggle,
   }
 })
 

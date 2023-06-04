@@ -13,28 +13,28 @@ interface Card {
 const cards = [
   {
     icon: 'i-fluent-emoji-memo',
-    title: 'Plan Your Learning',
-    description: 'Share And Create Your Study Plan',
+    title: 'Plan your learning',
+    description: 'Share and create your study plan',
   },
   {
     icon: 'i-fluent-emoji-pancakes',
-    title: 'Participation Pancakes',
+    title: 'Participation pancakes',
     description: 'Praise your peers for helping!',
   },
   {
     icon: 'i-fluent-emoji-calendar',
     title: 'Events',
-    description: 'Participate In Events Related To Your Modules',
+    description: 'Participate in events related to your modules',
   },
   {
     icon: 'i-material-symbols-forum-outline-rounded',
     title: 'Forum',
-    description: 'Chat, Learn And Share Your Notes With Your Peers',
+    description: 'Chat, learn and share your notes with your peers',
   },
   {
     icon: 'i-fluent-emoji-paw-prints',
     title: 'Pets',
-    description: 'Take Care Of Pets Or Redeem Prizes As You Study And Help Your Peers',
+    description: 'Take care of pets or redeem prizes as you study and help your peers',
   },
 ] satisfies Card[]
 </script>
@@ -68,19 +68,22 @@ const cards = [
 
       <div grid="~ gap-6 cols-1 md:cols-2" justify-center>
         <div v-for="card in cards" :key="card.title">
-          <div flex flex-col gap-3 card-low md:flex-row>
-            <div :class="card.icon" h-30 w-30 />
+          <Card rounded-xl>
+            <template #content>
+              <div flex flex-col gap-3 px-4 md:flex-row>
+                <div :class="card.icon" h-30 w-30 />
 
-            <div w-full flex flex-col md:w-60>
-              <h3 text-xl font-bold>
-                {{ card.title }}
-              </h3>
-
-              <p mt-2 text-lg>
-                {{ card.description }}
-              </p>
-            </div>
-          </div>
+                <div w-full flex flex-col md:w-60>
+                  <h3 my-0 text-xl font-bold>
+                    {{ card.title }}
+                  </h3>
+                  <p mt-2 text-lg>
+                    {{ card.description }}
+                  </p>
+                </div>
+              </div>
+            </template>
+          </Card>
         </div>
       </div>
     </section>

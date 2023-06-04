@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Button from 'primevue/button'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 
 interface Item {
@@ -41,6 +42,7 @@ useAsyncData(async () => {
   <div h-full flex="~ col">
     <Head>
       <Link rel="stylesheet" :href="theme.link" />
+      <Link rel="prefetch" as="style" :href="theme.preload" />
     </Head>
 
     <nav>
@@ -51,11 +53,12 @@ useAsyncData(async () => {
           </NuxtLink>
 
           <Popover md:hidden>
-            <CommonColorModeButton />
-
-            <PopoverButton ml-3 btn-outlined title="Open navigation menu" type="button">
-              <div i-tabler-menu-2 text-xl />
-            </PopoverButton>
+            <div flex items-center>
+              <CommonColorModeButton />
+              <PopoverButton text :as="Button" icon="true" ml-3 aria-label="Open">
+                <div i-tabler-menu-2 text-xl />
+              </PopoverButton>
+            </div>
 
             <Transition
               enter-active-class="transition duration-100 ease-out"
@@ -64,35 +67,38 @@ useAsyncData(async () => {
               leave-to-class="transform scale-95 opacity-0"
             >
               <PopoverPanel v-slot="{ close }" fixed inset-x-0 top-0 z-10 origin-top-right transform p-3 transition>
-                <div gap-2 rounded-lg bg-surface px-2 py-3 shadow-lg ring ring-1 ring-opacity-5>
-                  <div mb-3 flex="~ gap-3" justify-between>
-                    <NuxtLink to="/" @click="close">
-                      <CommonAppLogo m-3 h-8 />
-                    </NuxtLink>
+                <Card>
+                  <template #content>
+                    <div mb-3 flex="~ gap-3" justify-between>
+                      <NuxtLink to="/" @click="close">
+                        <CommonAppLogo m-3 h-8 />
+                      </NuxtLink>
 
-                    <div>
-                      <PopoverButton btn-outlined>
-                        <div i-tabler-x text-xl />
-                      </PopoverButton>
+                      <div>
+                        <PopoverButton text :as="Button" icon="true">
+                          <div i-tabler-x text-xl />
+                        </PopoverButton>
+                      </div>
                     </div>
-                  </div>
 
-                  <div flex="~ col">
-                    <NuxtLink v-for="item in items" :key="item.to" :to="item.to" text-lg btn-text @click="close">
-                      {{ item.name }}
-                    </NuxtLink>
-                  </div>
-                </div>
+                    <div flex="~ col">
+                      <NuxtLink v-for="item in items" :key="item.to" :to="item.to" @click="close">
+                        <Button link :label="item.name">
+                          {{ item.name }}
+                        </Button>
+                      </NuxtLink>
+                    </div>
+                  </template>
+                </Card>
               </PopoverPanel>
             </Transition>
           </Popover>
 
           <div hidden gap-5 md:flex md:items-center>
-            <NuxtLink
-              v-for="item in items" :key="item.to" :to="item.to"
-              :class="item.primary ? 'btn-filled' : 'btn-text'"
-            >
-              {{ item.name }}
+            <NuxtLink v-for="item in items" :key="item.to" :to="item.to">
+              <Button :link="!item.primary" :label="item.name">
+                {{ item.name }}
+              </Button>
             </NuxtLink>
 
             <CommonColorModeButton />

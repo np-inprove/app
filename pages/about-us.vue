@@ -9,6 +9,8 @@ definePageMeta({
   layout: 'landing',
 })
 
+const theme = useThemeStore()
+
 const authors = [
   {
     name: 'Ngui Jia Le Sherlena',
@@ -81,7 +83,7 @@ const authors = [
         </p>
         <p pt-5>
           The NP represents the school which this learning platform was created under. While the use of the colour
-          <span bg-logo-np px-1 text-white dark:text-black>{{ $colorMode.value === 'dark' ? 'WHITE' : 'BLACK' }}</span> represents
+          <span bg-logo-np px-1 text-white dark:text-black>{{ theme.mode === 'dark' ? 'WHITE' : 'BLACK' }}</span> represents
           that there is still some formality.
         </p>
         <p pt-5>

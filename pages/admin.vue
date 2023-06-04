@@ -46,7 +46,7 @@ async function submit() {
   if (mode.value === 'create')
     return await create()
   else
-    return await del()
+    return alert('implement me')
 }
 
 async function create() {
@@ -107,9 +107,16 @@ async function del() {
               <CommonInput v-model="formData.shortName" label="Institution Short Name" type="text" />
               <CommonInput v-model="formData.adminDomain" label="Admin Domain Name" type="text" />
               <CommonInput v-model="formData.studentDomain" label="Student Domain Name" type="text" />
-              <button self-start btn-filled type="submit">
-                Save changes
-              </button>
+
+              <div flex gap-3>
+                <button btn-filled type="submit">
+                  Save changes
+                </button>
+
+                <button v-if="mode === 'edit'" text-error btn-text type="button" @click="del">
+                  Delete
+                </button>
+              </div>
             </div>
           </form>
         </div>

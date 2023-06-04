@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Menu from 'primevue/menu'
+import Toast from 'primevue/toast'
 
 definePageMeta({
   layout: 'app',
@@ -28,6 +29,8 @@ function toCreate() {
 
 <template>
   <div>
+    <Toast />
+
     <div flex flex-col gap-8 lg:flex-row>
       <div>
         <h2 text-2xl font-semibold>

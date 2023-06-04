@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Toast from 'primevue/toast'
 import { useToast } from 'primevue/usetoast'
 import type { ValidationError } from '~/utils/error'
 
@@ -51,14 +50,13 @@ async function del() {
       summary: 'Success',
       detail: 'Institution deleted',
     })
+    navigateTo('/admin')
   }
 }
 </script>
 
 <template>
   <div>
-    <Toast />
-
     <div v-if="!initFormData.shortName">
       <h3 text-xl font-semibold>
         Institution not found

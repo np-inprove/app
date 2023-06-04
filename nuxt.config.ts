@@ -3,14 +3,14 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
     '@unocss/nuxt',
-    '@nuxtjs/color-mode',
   ],
   css: [
-    '@unocss/reset/tailwind.css',
-    '~/styles/vars.css',
-    '~/styles/colors.css',
+    'primevue/resources/primevue.css',
     '~/styles/global.css',
   ],
+  build: {
+    transpile: ['primevue'],
+  },
   devtools: {
     enabled: false,
   },
@@ -18,12 +18,5 @@ export default defineNuxtConfig({
     public: {
       apiUrl: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:3333',
     },
-  },
-  colorMode: {
-    preference: 'system',
-    fallback: 'light',
-    classPrefix: '',
-    classSuffix: '',
-    storageKey: 'nuxt-color-mode',
   },
 })

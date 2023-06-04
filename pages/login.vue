@@ -38,6 +38,8 @@ async function login() {
       </h1>
       <br>
       <form flex="~ col gap-5" @submit.prevent="login">
+        <InputText v-model="formData.email" type="text" />
+
         <CommonInput
           v-model="formData.email"
           :error="formData.error?.fields?.email"
@@ -61,6 +63,7 @@ async function login() {
         <button type="submit" :disabled="formData.isLoading" self-center btn-filled>
           Login
         </button>
+        <Button label="Login" />
       </form>
       <p flex justify-center pt-4>
         <NuxtLink to="/register" btn-text>

@@ -26,17 +26,23 @@ const items = [
 ] satisfies Item[]
 
 const auth = useAuthStore()
+const theme = useThemeStore()
 const headers = useRequestHeaders(['cookie'])
 
 useAsyncData(async () => {
   // Preload user data for SSR
   await auth.init(headers.cookie)
+  theme.init()
   return true // Prevent refetch
 })
 </script>
 
 <template>
   <div h-full flex="~ col">
+    <Head>
+      <Link rel="stylesheet" :href="theme.link" />
+    </Head>
+
     <nav>
       <div mx-auto container>
         <div flex items-center justify-between px5 py8>

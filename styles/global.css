@@ -6,10 +6,11 @@ body,
   padding: 0;
 }
 
-html.dark {
+/* html.dark {
   color-scheme: dark;
-}
+} */
 
 html {
-  --at-apply: bg-surface text-on-surface;
+  --at-apply: transition duration-100 ease-in-out;
+  --at-apply: font-$font-family;
 }

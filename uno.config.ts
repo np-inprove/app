@@ -91,7 +91,11 @@ export default defineConfig({
       'btn-text': 'btn-base text-primary hover:(bg-primary bg-opacity-08) px-4 py-2',
 
       'card-base': 'p-6 rounded-3xl',
+      'card': 'card-base bg-surface-container',
       'card-low': 'card-base bg-surface-container-low',
+      'card-lowest': 'card-base bg-surface-container-lowest',
+      'card-high': 'card-base bg-surface-container-high',
+      'card-highest': 'card-base bg-surface-container-highest',
     },
   ],
   presets: [

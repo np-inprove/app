@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Menu from 'primevue/menu'
+import type { MenuItem } from 'primevue/menuitem'
 import Toast from 'primevue/toast'
 
 definePageMeta({
@@ -16,10 +17,12 @@ useAsyncData(async () => {
 })
 
 const institutionsMenu = computed(() => {
-  return [...institution.institutions.map(inst => ({
+  const i: MenuItem[] = institution.institutions.map(inst => ({
     label: `${inst.name} (${inst.shortName})`,
     to: `/admin/${inst.shortName}`,
-  })), { separator: true }]
+  }))
+  i.push({ separator: true })
+  return i
 })
 
 function toCreate() {
@@ -53,20 +56,19 @@ function toCreate() {
   </div>
 </template>
 
-<style>
-a.router-link-active {
+<style scoped>
+:deep(a.router-link-active) {
   background-color: var(--highlight-bg);
   color: var(--highlight-text-color);
   --at-apply: font-bold;
 }
 
-a.router-link-active:hover {
+:deep(a.router-link-active:hover) {
   background-color: var(--highlight-bg);
   color: var(--highlight-text-color);
-
 }
 
-a.router-link-active>.menu-icon i {
+:deep(a.router-link-active>.menu-icon i) {
   color: var(--highlight-text-color);
 }
 </style>

@@ -81,7 +81,7 @@ const authors = [
     </h2>
     <div grid="~ cols-1 md:cols-2" p-5>
       <div h-full flex items-center justify-center py-2>
-        <CommonAppLogo h-8 />
+        <CommonAppLogo h-30 />
       </div>
       <div text-justify md:pl-10>
         <p>

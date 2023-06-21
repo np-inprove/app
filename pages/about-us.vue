@@ -11,6 +11,14 @@ definePageMeta({
 
 const theme = useThemeStore()
 
+const textColor = computed(() => {
+  return theme.mode === 'dark' ? 'text-black' : 'text-white'
+})
+
+const bgColor = computed(() => {
+  return theme.mode === 'dark' ? 'bg-white' : 'bg-black'
+})
+
 const authors = [
   {
     name: 'Ngui Jia Le Sherlena',
@@ -78,18 +86,18 @@ const authors = [
       <div text-justify md:pl-10>
         <p>
           The rocket in the i represents the user embarking on the journey of self-directed learning. The colour
-          <span bg-logo-i px-1 text-white dark:text-black>RED</span> is used to emphasise the part that the user has to
+          <span class="bg-logo-red" px-1 :class="textColor">RED</span> is used to emphasise the part that the user has to
           play.
         </p>
         <p pt-5>
           The NP represents the school which this learning platform was created under. While the use of the colour
-          <span bg-logo-np px-1 text-white dark:text-black>{{ theme.mode === 'dark' ? 'WHITE' : 'BLACK' }}</span> represents
+          <span px-1 :class="[textColor, bgColor]">{{ theme.mode === 'dark' ? 'WHITE' : 'BLACK' }}</span> represents
           that there is still some formality.
         </p>
         <p pt-5>
           The letters r and v are playing with the letter o which is designed as a ball to emphasise the gamification of
-          the platform and the colours used are brighter colours like <span bg-logo-rv px-1 text-black>YELLOW</span> and
-          <span bg-logo-oe px-1 text-black>CYAN</span> to show a more fun platform.
+          the platform and the colours used are brighter colours like <span class="bg-logo-yellow" px-1 text-black>YELLOW</span> and
+          <span class="bg-logo-cyan" px-1 text-black>CYAN</span> to show a more fun platform.
         </p>
       </div>
     </div>
@@ -101,3 +109,15 @@ const authors = [
     </div>
   </div>
 </template>
+
+<style scoped>
+.bg-logo-red {
+  background-color: hsl(5, 100%, 68%);
+}
+.bg-logo-yellow {
+  background-color: hsl(48, 100%, 50%);
+}
+.bg-logo-cyan {
+  background-color: hsl(173, 100%, 43%);
+}
+</style>

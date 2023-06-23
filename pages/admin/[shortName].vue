@@ -17,8 +17,7 @@ const initFormData = computed(() => {
     return {
       name: '',
       shortName: '',
-      adminDomain: '',
-      studentDomain: '',
+      description: '',
       isLoading: false,
       error: {},
     }
@@ -33,11 +32,10 @@ const initFormData = computed(() => {
 const formData = ref<{
   name: string
   shortName: string
-  adminDomain: string
-  studentDomain: string
+  description: string
   isLoading: boolean
   error: ValidationError
-}>(initFormData.value)
+}>(initFormData)
 
 async function del() {
   const err = await institution.del(formData.value.shortName)
@@ -51,6 +49,21 @@ async function del() {
       detail: 'Institution deleted',
     })
     navigateTo('/admin')
+  }
+}
+
+async function update() {
+  const err = await institution.update(formData.value.name, formData.value.shortName, formData.value.description)
+  if (err) {
+    formData.value.error = err
+  }
+  else {
+    toast.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Institution created',
+    })
+    navigateTo(`/admin/${formData.value.shortName}`)
   }
 }
 </script>
@@ -71,7 +84,7 @@ async function del() {
       </h3>
 
       <div mt-5>
-        <form @submit.prevent="">
+        <form @submit.prevent="update()">
           <div flex flex-col gap-2>
             <div>
               <span class="p-float-label">
@@ -91,17 +104,10 @@ async function del() {
 
             <div>
               <span class="p-float-label">
-                <InputText id="adminDomain" v-model="formData.adminDomain" type="text" required class="w-full" />
-                <label for="adminDomain">Admin domain</label>
+                <InputText id="description" v-model="formData.description" type="text" required class="w-full" />
+                <label for="description">Description</label>
               </span>
               <small class="p-error">{{ formData.error?.fields?.adminDomain || '&nbsp;' }}</small>
-            </div>
-            <div>
-              <span class="p-float-label">
-                <InputText id="studentDomain" v-model="formData.studentDomain" type="text" required class="w-full" />
-                <label for="studentDomain">Student domain</label>
-              </span>
-              <small class="p-error">{{ formData.error?.fields?.studentDomain || '&nbsp;' }}</small>
             </div>
 
             <div flex gap-3>

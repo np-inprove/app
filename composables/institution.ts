@@ -108,6 +108,7 @@ export const useInstitutionStore = defineStore('institution', () => {
     init,
     create,
     del,
+    update,
   }
 })
 

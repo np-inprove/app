@@ -19,8 +19,7 @@ useAsyncData(async () => {
 const initFormData = {
   name: '',
   shortName: '',
-  adminDomain: '',
-  studentDomain: '',
+  description: '',
   isLoading: false,
   error: {},
 }
@@ -28,14 +27,13 @@ const initFormData = {
 const formData = ref<{
   name: string
   shortName: string
-  adminDomain: string
-  studentDomain: string
+  description: string
   isLoading: boolean
   error: ValidationError
 }>(initFormData)
 
 async function create() {
-  const err = await institution.create(formData.value.name, formData.value.shortName, formData.value.adminDomain, formData.value.studentDomain)
+  const err = await institution.create(formData.value.name, formData.value.shortName, formData.value.description)
   if (err) {
     formData.value.error = err
   }
@@ -79,17 +77,10 @@ async function create() {
 
           <div>
             <span class="p-float-label">
-              <InputText id="adminDomain" v-model="formData.adminDomain" type="text" required class="w-full" />
-              <label for="adminDomain">Admin domain</label>
+              <InputText id="description" v-model="formData.description" type="text" required class="w-full" />
+              <label for="description">Description</label>
             </span>
-            <small class="p-error">{{ formData.error?.fields?.adminDomain || '&nbsp;' }}</small>
-          </div>
-          <div>
-            <span class="p-float-label">
-              <InputText id="studentDomain" v-model="formData.studentDomain" type="text" required class="w-full" />
-              <label for="studentDomain">Student domain</label>
-            </span>
-            <small class="p-error">{{ formData.error?.fields?.studentDomain || '&nbsp;' }}</small>
+            <small class="p-error">{{ formData.error?.fields?.description || '&nbsp;' }}</small>
           </div>
 
           <div flex gap-3>

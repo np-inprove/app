@@ -33,19 +33,17 @@ export const useInstitutionStore = defineStore('institution', () => {
    *
    * @param name name of the institution
    * @param shortName short name of the institution, must be alphanumeric (incl. dashes)
-   * @param adminDomain fqdn of admin email addresses
-   * @param studentDomain fqdn of student email addresses
+   * @param description description of institution
    * @returns ValidationError | undefined
    */
-  async function create(name: string, shortName: string, adminDomain: string, studentDomain: string) {
+  async function create(name: string, shortName: string, description: string) {
     try {
       const res = await $api<Institution>('/institutions', {
         method: 'POST',
         body: {
           name,
           shortName,
-          adminDomain,
-          studentDomain,
+          description,
         },
       })
       institutions.value.push(res)
@@ -73,6 +71,33 @@ export const useInstitutionStore = defineStore('institution', () => {
     }
     catch (e) {
       console.error('[composables/institution.ts] failed to delete institution', e)
+      return parseError(e)
+    }
+  }
+
+  /**
+   * update an existing institution
+   *
+   * @param name name of the institution
+   * @param shortName short name of the institution, must be alphanumeric (incl. dashes)
+   * @param description description of institution
+   * @returns ValidationError | undefined
+   */
+
+  async function update(name: string, shortName: string, description: string) {
+    try {
+      const res = await $api<Institution>(`/institutions/${shortName}`, {
+        method: 'PUT',
+        body: {
+          name,
+          shortName,
+          description,
+        },
+      })
+      institutions.value.push(res)
+    }
+    catch (e) {
+      console.error('[composables/institution.ts] failed to create institution', e)
       return parseError(e)
     }
   }

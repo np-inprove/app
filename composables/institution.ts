@@ -84,9 +84,9 @@ export const useInstitutionStore = defineStore('institution', () => {
    * @returns ValidationError | undefined
    */
 
-  async function update(name: string, shortName: string, description: string) {
+  async function update(name: string, shortName: string, description: string, originalShortName: string | string[]) {
     try {
-      const res = await $api<Institution>(`/institutions/${shortName}`, {
+      const res = await $api<Institution>(`/institutions/${originalShortName}`, {
         method: 'PUT',
         body: {
           name,
@@ -94,10 +94,11 @@ export const useInstitutionStore = defineStore('institution', () => {
           description,
         },
       })
+      institutions.value = institutions.value.filter(inst => inst.shortName !== originalShortName)
       institutions.value.push(res)
     }
     catch (e) {
-      console.error('[composables/institution.ts] failed to create institution', e)
+      console.error('[composables/institution.ts] failed to update institution', e)
       return parseError(e)
     }
   }

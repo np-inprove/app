@@ -35,7 +35,7 @@ const formData = ref<{
   description: string
   isLoading: boolean
   error: ValidationError
-}>(initFormData)
+}>(initFormData.value)
 
 async function del() {
   const err = await institution.del(formData.value.shortName)
@@ -53,7 +53,7 @@ async function del() {
 }
 
 async function update() {
-  const err = await institution.update(formData.value.name, formData.value.shortName, formData.value.description)
+  const err = await institution.update(formData.value.name, formData.value.shortName, formData.value.description, router.currentRoute.value.params.shortName)
   if (err) {
     formData.value.error = err
   }
@@ -61,7 +61,7 @@ async function update() {
     toast.add({
       severity: 'success',
       summary: 'Success',
-      detail: 'Institution created',
+      detail: 'Institution modified',
     })
     navigateTo(`/admin/${formData.value.shortName}`)
   }
@@ -107,7 +107,7 @@ async function update() {
                 <InputText id="description" v-model="formData.description" type="text" required class="w-full" />
                 <label for="description">Description</label>
               </span>
-              <small class="p-error">{{ formData.error?.fields?.adminDomain || '&nbsp;' }}</small>
+              <small class="p-error">{{ formData.error?.fields?.description || '&nbsp;' }}</small>
             </div>
 
             <div flex gap-3>

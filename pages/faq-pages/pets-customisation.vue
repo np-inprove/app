@@ -8,6 +8,9 @@ definePageMeta({
   <div pb-5 md:pb-10>
     <h1>FAQ: Am I able to change my pet?</h1>
     <hr>
+    <p>
+      To Be Implemented
+    </p>
     <!-- <p>
       Forgot the password to your account and need to change it?
     </p>

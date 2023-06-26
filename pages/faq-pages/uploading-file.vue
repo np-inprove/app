@@ -7,7 +7,11 @@ definePageMeta({
 <template>
   <div pb-5 md:pb-10>
     <h1>FAQ: How do I upload a file to the forum?</h1>
-    <hr><!-- <p>
+    <hr>
+    <p>
+      To Be Implemented
+    </p>
+    <!-- <p>
       Forgot the password to your account and need to change it?
     </p>
     <p>

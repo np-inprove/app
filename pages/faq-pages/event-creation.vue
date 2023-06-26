@@ -8,6 +8,9 @@ definePageMeta({
   <div pb-5 md:pb-10>
     <h1>FAQ: How do I create an event for a group?</h1>
     <hr>
+    <p>
+      To Be Implemented
+    </p>
     <!-- <p>
       Forgot the password to your account and need to change it?
     </p>

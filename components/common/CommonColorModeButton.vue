@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Button from 'primevue/button'
+
 const theme = useThemeStore()
 </script>
 

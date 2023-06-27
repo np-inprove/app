@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Card from 'primevue/card'
+
 const props = defineProps({
   name: String,
   title: String,

@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import Card from 'primevue/card'
+import InputText from 'primevue/inputtext'
+import Button from 'primevue/button'
+
 import type { ValidationError } from '~/utils/error'
 
 definePageMeta({
@@ -58,13 +62,6 @@ async function login() {
 
           <Button label="Login" type="submit" :loading="formData.isLoading" w-full />
         </form>
-        <p flex justify-center pt-4>
-          <NuxtLink to="/register">
-            <Button link aria-label="Register for an account">
-              Don't have an account? Register here
-            </Button>
-          </NuxtLink>
-        </p>
       </template>
     </Card>
   </div>

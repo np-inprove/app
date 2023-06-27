@@ -1,10 +1,17 @@
 <script setup lang="ts">
+import InputText from 'primevue/inputtext'
+import Card from 'primevue/card'
+import Button from 'primevue/button'
 import type { ValidationError } from '~/utils/error'
 
 definePageMeta({
   layout: 'landing',
   middleware: 'anon',
 })
+
+const app = useNuxtApp()
+const auth = useAuthStore()
+const route = useRoute()
 
 const formData = reactive<{
   firstName: string
@@ -23,16 +30,20 @@ const formData = reactive<{
   error: {},
   isLoading: false,
 })
-
 const noMatchErr = computed(() => (formData.password !== formData.confirmPassword ? 'Password does not match' : ''))
 
-const auth = useAuthStore()
+const { data, error } = useAsyncData(async () => {
+  return await app.$api<InstitutionInviteLink>(`/auth/invites/${route.params.code}`)
+})
 
 async function register() {
   if (noMatchErr.value)
     return
   formData.isLoading = true
-  const err = await auth.register(formData.firstName, formData.lastName, formData.email, formData.password)
+  const err = await auth.register(
+    route.params.code as string,
+    formData.firstName, formData.lastName, formData.email, formData.password,
+  )
   if (!err)
     return navigateTo('/dashboard')
   formData.error = err
@@ -42,11 +53,18 @@ async function register() {
 
 <template>
   <div h-full flex items-center justify-center>
-    <Card class="mb-40 min-w-[350px] rounded-xl p-6 md:(min-w-[400px] p-10)">
+    <div v-if="error">
+      Invite link is not valid!
+    </div>
+
+    <Card v-else class="mb-40 min-w-[350px] rounded-xl p-6 md:(min-w-[400px] p-10)">
       <template #header>
-        <h1 text-center text-2xl font-semibold>
-          Register for iNProve
-        </h1>
+        <span w-full text-center>
+          You've been invited to join as an {{ data?.role }} for
+        </span>
+        <h2 text-center text-2xl font-semibold>
+          {{ data?.institution.name }}
+        </h2>
       </template>
       <template #content>
         <form flex="~ col gap-5" @submit.prevent="register">
@@ -84,8 +102,10 @@ async function register() {
 
           <div>
             <span class="p-float-label">
-              <InputText id="confirmPassword" v-model="formData.confirmPassword" type="password" required
-                class="w-full" />
+              <InputText
+                id="confirmPassword" v-model="formData.confirmPassword" type="password" required
+                class="w-full"
+              />
               <label for="confirmPassword">Confirm password</label>
             </span>
             <small class="p-error">{{ formData.error?.fields?.confirmPassword || '&nbsp;' }}</small>
@@ -95,13 +115,13 @@ async function register() {
             Register
           </Button>
         </form>
-        <p flex justify-center pt-4>
-          <NuxtLink to="/login">
-            <Button link aria-label="Login now">
-              Already have an account? Login now
-            </Button>
-          </NuxtLink>
-        </p>
+      </template>
+      <template #footer>
+        <NuxtLink to="/login">
+          <Button link aria-label="Login now">
+            Already have an account? Login now
+          </Button>
+        </NuxtLink>
       </template>
     </Card>
   </div>

@@ -4,6 +4,7 @@ export const useInstitutionStore = defineStore('institution', () => {
   const { $api } = useNuxtApp()
 
   const institutions = ref<Institution[]>([])
+  const invites = ref<Record<string, InstitutionInviteLink[]>>({})
 
   /**
    * init populates the store with institutions available in iNProve and does nothing
@@ -78,15 +79,16 @@ export const useInstitutionStore = defineStore('institution', () => {
   /**
    * update an existing institution
    *
+   * @param principal short name of the institution
    * @param name name of the institution
-   * @param shortName short name of the institution, must be alphanumeric (incl. dashes)
+   * @param shortName new short name of the institution, must be alphanumeric (incl. dashes)
    * @param description description of institution
    * @returns ValidationError | undefined
    */
 
-  async function update(name: string, shortName: string, description: string, originalShortName: string | string[]) {
+  async function update(principal: string, name: string, shortName: string, description: string) {
     try {
-      const res = await $api<Institution>(`/institutions/${originalShortName}`, {
+      const res = await $api<Institution>(`/institutions/${principal}`, {
         method: 'PUT',
         body: {
           name,
@@ -94,8 +96,11 @@ export const useInstitutionStore = defineStore('institution', () => {
           description,
         },
       })
-      institutions.value = institutions.value.filter(inst => inst.shortName !== originalShortName)
-      institutions.value.push(res)
+      const idx = institutions.value.findIndex(i => i.shortName === principal)
+      if (idx === -1)
+        throw new Error('invariant')
+
+      institutions.value[idx] = res
     }
     catch (e) {
       console.error('[composables/institution.ts] failed to update institution', e)
@@ -103,13 +108,65 @@ export const useInstitutionStore = defineStore('institution', () => {
     }
   }
 
+  /**
+   * loadInvites populates the invites value on demand for a given institution
+   *
+   * @param shortName short name of the institution
+   * @returns ValidationError | undefined
+   */
+  async function loadInvites(shortName: string) {
+    try {
+      const res = await $api<InstitutionInviteLink[]>(`/institutions/${shortName}/invites`)
+      invites.value[shortName] = res
+    }
+    catch (err) {
+      console.error('[composables/institution.ts] failed to load invites', err)
+      return parseError(err)
+    }
+  }
+
+  async function createInvite(shortName: string, role: string) {
+    try {
+      const res = await $api<InstitutionInviteLink>(`/institutions/${shortName}/invites`, {
+        method: 'POST',
+        body: {
+          role,
+        },
+      })
+      invites.value[shortName].push(res)
+    }
+    catch (e) {
+      console.error('[composables/institution.ts] failed to create invite', e)
+      return parseError(e)
+    }
+  }
+
+  async function delInvite(shortName: string, code: string) {
+    try {
+      await $api<InstitutionInviteLink>(`/institutions/${shortName}/invites/${code}`, {
+        method: 'DELETE',
+      })
+
+      invites.value[shortName] = invites.value[shortName].filter(v => v.code !== code)
+    }
+    catch (err) {
+      console.error('[composables/institution.ts] failed to create invite', err)
+      return parseError(err)
+    }
+  }
+
   return {
     institutions,
+    invites,
 
     init,
     create,
     del,
     update,
+
+    loadInvites,
+    createInvite,
+    delInvite,
   }
 })
 

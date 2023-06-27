@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import Card from 'primevue/card'
+
 definePageMeta({
   layout: 'landing',
   middleware: 'anon',
 })
 
-interface Card {
+interface CardContent {
   icon: string
   title: string
   description: string
@@ -36,7 +38,7 @@ const cards = [
     title: 'Pets',
     description: 'Take care of pets or redeem prizes as you study and help your peers',
   },
-] satisfies Card[]
+] satisfies CardContent[]
 </script>
 
 <template>

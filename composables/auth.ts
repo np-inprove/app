@@ -40,6 +40,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   /**
    * login authenticates the user and populates the store
+   *
    * @param email email of the user
    * @param password password of the user
    */
@@ -62,17 +63,19 @@ export const useAuthStore = defineStore('auth', () => {
   /**
    * register creates a new user account and populates the store
    *
+   * @param inviteCode invite code to use for registration
    * @param firstName first name of the user
    * @param lastName last name of the user
    * @param email email of the user, must be a domain which is registered in an institution
    * @param password password of the user, min length of 6
    * @returns ValidationError | undefined
    */
-  async function register(firstName: string, lastName: string, email: string, password: string) {
+  async function register(inviteCode: string, firstName: string, lastName: string, email: string, password: string) {
     try {
       const res = await $api<User>('/auth/register', {
         method: 'POST',
         body: {
+          inviteCode,
           firstName,
           lastName,
           email,

@@ -14,3 +14,12 @@ interface User {
   pointsAwardedResetTime?: string
   godMode?: boolean
 }
+
+interface InstitutionInviteLink {
+  id: string
+  code: string
+  role: InstitutionRoles
+  institution: Institution
+}
+
+type InstitutionRoles = 'admin' | 'educator' | 'member'

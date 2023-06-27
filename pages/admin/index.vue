@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import InputText from 'primevue/inputtext'
+import Button from 'primevue/button'
+
 import { useToast } from 'primevue/usetoast'
 import type { ValidationError } from '~/utils/error'
 

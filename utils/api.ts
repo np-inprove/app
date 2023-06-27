@@ -2,8 +2,7 @@ interface Institution {
   id: number
   name: string
   shortName: string
-  adminDomain: string
-  studentDomain: string
+  description: string
 }
 
 interface User {

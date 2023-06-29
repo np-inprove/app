@@ -13,10 +13,12 @@ const router = useRouter()
 const toast = useToast()
 const group = useGroupStore()
 
+const groupData = computed(() => group.groups.find(grp => grp.shortName === router.currentRoute.value.params.shortName))
+
 const initFormData = computed(() => {
-  const res = group.groups.find(grp => grp.shortName === router.currentRoute.value.params.shortName)
-  if (!res) {
+  if (!groupData.value) {
     return {
+      ogShortName: '',
       name: '',
       shortName: '',
       description: '',
@@ -25,13 +27,15 @@ const initFormData = computed(() => {
     }
   }
   return {
-    ...res,
+    ogShortName: groupData.value.shortName,
+    ...groupData.value,
     isLoading: false,
     error: {},
   }
 })
 
 const formData = ref<{
+  ogShortName: string
   name: string
   shortName: string
   description: string
@@ -40,7 +44,7 @@ const formData = ref<{
 }>(initFormData.value)
 
 async function update() {
-  const err = await group.update(router.currentRoute.value.params.shortName, formData.value.name, formData.value.shortName, formData.value.description)
+  const err = await group.update(formData.value.ogShortName, formData.value.name, formData.value.shortName, formData.value.description)
   if (err) {
     formData.value.error = err
   }
@@ -50,12 +54,12 @@ async function update() {
       summary: 'Success',
       detail: 'Group updated',
     })
-    navigateTo('/dashboard/admin/groups')
+    navigateTo(`/dashboard/admin/groups/${formData.value.shortName}`)
   }
 }
 
 async function del() {
-  const err = await group.del(formData.value.shortName)
+  const err = await group.del(formData.value.ogShortName)
   if (err) {
     formData.value.error = err
   }

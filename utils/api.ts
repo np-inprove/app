@@ -28,5 +28,5 @@ interface Group {
   id: number
   name: string
   shortName: string
-  description: String
+  description: string
 }

@@ -23,3 +23,10 @@ interface InstitutionInviteLink {
 }
 
 type InstitutionRoles = 'admin' | 'educator' | 'member'
+
+interface Group {
+  id: number
+  name: string
+  shortName: string
+  description: String
+}

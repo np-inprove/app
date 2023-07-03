@@ -28,13 +28,12 @@ const items = [
 ] satisfies Item[]
 
 const auth = useAuthStore()
-const theme = useThemeStore()
+const theme = useTheme()
 const headers = useRequestHeaders(['cookie'])
 
 useAsyncData(async () => {
   // Preload user data for SSR
   await auth.init(headers.cookie)
-  theme.init()
   return true // Prevent refetch
 })
 </script>
@@ -43,7 +42,6 @@ useAsyncData(async () => {
   <div h-full flex="~ col">
     <Head>
       <Link rel="stylesheet" :href="theme.link" />
-      <Link rel="prefetch" as="style" :href="theme.preload" />
     </Head>
 
     <nav>

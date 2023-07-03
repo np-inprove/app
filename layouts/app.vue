@@ -23,12 +23,11 @@ const items = [
 ] satisfies Item[]
 
 const auth = useAuthStore()
-const theme = useThemeStore()
+const theme = useTheme()
 
 const headers = useRequestHeaders(['cookie'])
 useAsyncData(async () => {
   await auth.init(headers.cookie)
-  theme.init()
   return Promise.resolve(true)
 })
 </script>
@@ -37,7 +36,6 @@ useAsyncData(async () => {
   <div h-full>
     <Head>
       <Link rel="stylesheet" :href="theme.link" />
-      <Link rel="prefetch" as="style" :href="theme.preload" />
     </Head>
 
     <header>

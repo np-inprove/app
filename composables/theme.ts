@@ -48,5 +48,22 @@ export const useThemeStore = defineStore('theme', () => {
   }
 })
 
+export function useTheme() {
+  const theme = useThemeStore()
+  useAsyncData(async () => {
+    theme.init()
+    return true
+  })
+  onMounted(async () => {
+    try {
+      await $fetch(theme.preload)
+    }
+    catch (err) {
+      console.error(err)
+    }
+  })
+  return theme
+}
+
 if (import.meta.hot)
   import.meta.hot.accept(acceptHMRUpdate(useThemeStore, import.meta.hot))

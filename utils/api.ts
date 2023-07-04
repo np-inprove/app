@@ -30,3 +30,12 @@ interface Group {
   shortName: string
   description: string
 }
+
+interface GroupInviteLink {
+  id: string
+  code: string
+  role: GroupRoles
+  group: Group
+}
+
+type GroupRoles = 'owner' | 'educator' | 'member'

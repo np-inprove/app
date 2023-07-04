@@ -4,6 +4,7 @@ export const useGroupStore = defineStore('group', () => {
   const { $api } = useNuxtApp()
 
   const groups = ref<Group[]>([])
+  const invites = ref<Record<string, GroupInviteLink[]>>({})
 
   /**
    * init populates the store with groups available in iNProve and does nothing
@@ -57,13 +58,14 @@ export const useGroupStore = defineStore('group', () => {
   /**
    * update a group
    *
+   * @param prevName name of the previous group to display current information presented on the site
    * @param prevshortName short name of the previous group used to update all information
    * @param name name of the group
    * @param shortName short name of the group, must be alphanumeric (incl. dashes)
    * @param description description of group
    * @returns ValidationError | undefined
    */
-  async function update(prevshortName: string, name: string, shortName: string, description: string) {
+  async function update(prevName: string, prevshortName: string, name: string, shortName: string, description: string) {
     try {
       const res = await $api<Group>(`/groups/${prevshortName}`, {
         method: 'PUT',
@@ -106,13 +108,65 @@ export const useGroupStore = defineStore('group', () => {
     }
   }
 
+  /**
+   * loadInvites populates the invites value on demand for a given group
+   *
+   * @param shortName short name of the group
+   * @returns ValidationError | undefined
+   */
+  async function loadInvites(shortName: string) {
+    try {
+      const res = await $api<GroupInviteLink[]>(`/groups/${shortName}/invites`)
+      invites.value[shortName] = res
+    }
+    catch (err) {
+      console.error('[composables/groups.ts] failed to load invites', err)
+      return parseError(err)
+    }
+  }
+
+  async function createInvite(shortName: string, role: string) {
+    try {
+      const res = await $api<GroupInviteLink>(`/groups/${shortName}/invites`, {
+        method: 'POST',
+        body: {
+          role,
+        },
+      })
+      invites.value[shortName].push(res)
+    }
+    catch (e) {
+      console.error('[composables/groups.ts] failed to create invite', e)
+      return parseError(e)
+    }
+  }
+
+  async function delInvite(shortName: string, code: string) {
+    try {
+      await $api<GroupInviteLink>(`/groups/${shortName}/invites/${code}`, {
+        method: 'DELETE',
+      })
+
+      invites.value[shortName] = invites.value[shortName].filter(v => v.code !== code)
+    }
+    catch (err) {
+      console.error('[composables/groups.ts] failed to create invite', err)
+      return parseError(err)
+    }
+  }
+
   return {
     groups,
+    invites,
 
     init,
     create,
     update,
     del,
+
+    loadInvites,
+    createInvite,
+    delInvite,
   }
 })
 

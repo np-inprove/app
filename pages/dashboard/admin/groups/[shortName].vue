@@ -120,11 +120,11 @@ const options = ref([
 ])
 
 async function createlink() {
-  if (!inviteFormData.role)
+  if (groupData.value === undefined || !inviteFormData.role)
     return
 
   inviteFormData.pending = true
-  const err = await group.createInvite(groupData, inviteFormData.role)
+  const err = await group.createInvite(groupData.value.shortName, inviteFormData.role)
   if (err)
     inviteFormData.error = err
 
@@ -139,7 +139,10 @@ function copyLink(code: string) {
 async function delinvite(code: string) {
   inviteFormData.pendingDel = code
 
-  const err = await group.delInvite(groupData, code)
+  if (groupData.value === undefined)
+    return
+
+  const err = await group.delInvite(groupData.value.shortName, code)
   if (err)
     inviteFormData.error = err
 

@@ -9,7 +9,6 @@ definePageMeta({
   middleware: 'god-mode',
 })
 
-const router = useRouter()
 const group = useGroupStore()
 const headers = useRequestHeaders(['cookie'])
 useAsyncData(async () => {
@@ -20,14 +19,14 @@ useAsyncData(async () => {
 const groupsMenu = computed(() => {
   const i: MenuItem[] = group.groups.map(grp => ({
     label: `${grp.name} (${grp.shortName})`,
-    to: `/dashboard/admin/groups/${grp.shortName}`,
+    to: `${grp.shortName}`,
   }))
   i.push({ separator: true })
   return i
 })
 
 function toCreate() {
-  router.push('/dashboard/admin/groups')
+  navigateTo('new')
 }
 </script>
 

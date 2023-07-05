@@ -45,7 +45,7 @@ async function register() {
     formData.firstName, formData.lastName, formData.email, formData.password,
   )
   if (!err)
-    return navigateTo('/dashboard')
+    return navigateTo(`/@${data.value?.institution.shortName}/dashboard`)
   formData.error = err
   formData.isLoading = false
 }

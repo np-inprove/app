@@ -22,15 +22,15 @@ interface AdminPages {
 const adminPages = [
   {
     text: 'Manage Group',
-    link: '/dashboard/admin/groups',
+    link: 'manage/groups/new',
   },
   {
     text: 'View available Pet Accessories and Vouchers',
-    link: '/dashboard/admin/rewards',
+    link: 'manage/rewards',
   },
   {
     text: 'Modify Pet Accessories and Vouchers',
-    link: '/dashboard/admin/add-rewards',
+    link: 'manage/add-rewards',
   },
 ] satisfies AdminPages[]
 </script>

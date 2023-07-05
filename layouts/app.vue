@@ -43,7 +43,7 @@ useAsyncData(async () => {
     <header>
       <div mx-auto container>
         <div flex items-center justify-between px5 py8>
-          <NuxtLink to="/">
+          <NuxtLink :to="`/@${auth.institutionShortName}/dashboard`">
             <CommonAppLogo h-8 />
           </NuxtLink>
 

@@ -11,6 +11,10 @@ export const useAuthStore = defineStore('auth', () => {
   const pointsAwardedResetTime = ref(new Date(Date.now()))
   const godMode = ref(false)
 
+  const institutionName = ref('')
+  const institutionShortName = ref('')
+  const institutionDescription = ref('')
+
   const authenticated = computed(() => !!email.value)
 
   /**
@@ -31,6 +35,24 @@ export const useAuthStore = defineStore('auth', () => {
           : undefined,
       })
       populate(res)
+      await getuserinstitution(cookie)
+    }
+    catch (e) {
+      console.error('[composables/user.ts] failed to init store', e)
+      return parseError(e)
+    }
+  }
+
+  async function getuserinstitution(cookie?: string) {
+    try {
+      const res = await $api<Institution>('/auth/myinstitution', {
+        headers: cookie
+          ? {
+              cookie,
+            }
+          : undefined,
+      })
+      populateInst(res)
     }
     catch (e) {
       console.error('[composables/user.ts] failed to init store', e)
@@ -53,6 +75,7 @@ export const useAuthStore = defineStore('auth', () => {
         },
       })
       populate(res)
+      await getuserinstitution()
     }
     catch (e) {
       console.error('[composables/user.ts] failed to login', e)
@@ -83,6 +106,7 @@ export const useAuthStore = defineStore('auth', () => {
         },
       })
       populate(res)
+      await getuserinstitution()
     }
     catch (e) {
       console.error('[composables/user.ts] failed to register', e)
@@ -116,6 +140,12 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  function populateInst(data: Institution) {
+    institutionName.value = data.name
+    institutionShortName.value = data.shortName
+    institutionDescription.value = data.description
+  }
+
   return {
     firstName,
     lastName,
@@ -124,6 +154,10 @@ export const useAuthStore = defineStore('auth', () => {
     pointsAwardedCount,
     pointsAwardedResetTime,
     godMode,
+
+    institutionName,
+    institutionShortName,
+    institutionDescription,
 
     authenticated,
 

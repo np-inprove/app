@@ -20,6 +20,7 @@ definePageMeta({
 const route = useRoute()
 const router = useRouter()
 const toast = useToast()
+const auth = useAuthStore()
 const group = useGroupStore()
 
 onMounted(async () => {
@@ -74,7 +75,7 @@ async function update() {
       summary: 'Success',
       detail: 'Group updated',
     })
-    navigateTo(`/dashboard/admin/groups/${formData.value.shortName}`)
+    navigateTo(`/@${auth.institutionShortName}/manage/groups/${formData.value.shortName}`)
   }
 }
 
@@ -89,7 +90,7 @@ async function del() {
       summary: 'Success',
       detail: 'Group deleted',
     })
-    navigateTo('/dashboard/admin/groups')
+    navigateTo(`/@${auth.institutionShortName}/manage/groups`)
   }
 }
 

@@ -11,6 +11,7 @@ definePageMeta({
 
 const toast = useToast()
 
+const auth = useAuthStore()
 const group = useGroupStore()
 const headers = useRequestHeaders(['cookie'])
 useAsyncData(async () => {
@@ -45,7 +46,7 @@ async function create() {
       summary: 'Success',
       detail: 'Group created',
     })
-    navigateTo(`/dashboard/admin/groups/${formData.value.shortName}`)
+    navigateTo(`/@${auth.institutionShortName}/manage/groups/${formData.value.shortName}`)
   }
 }
 </script>

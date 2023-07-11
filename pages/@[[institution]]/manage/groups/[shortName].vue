@@ -75,7 +75,7 @@ async function update() {
       summary: 'Success',
       detail: 'Group updated',
     })
-    navigateTo(`/@${auth.institutionShortName}/manage/groups/${formData.value.shortName}`)
+    navigateTo(`/@${auth.institution?.shortName}/manage/groups/${formData.value.shortName}`)
   }
 }
 
@@ -90,7 +90,7 @@ async function del() {
       summary: 'Success',
       detail: 'Group deleted',
     })
-    navigateTo(`/@${auth.institutionShortName}/manage/groups`)
+    navigateTo(`/@${auth.institution?.shortName}/manage/groups`)
   }
 }
 

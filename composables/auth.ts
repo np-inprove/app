@@ -3,19 +3,10 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 export const useAuthStore = defineStore('auth', () => {
   const { $api } = useNuxtApp()
 
-  const firstName = ref('')
-  const lastName = ref('')
-  const email = ref('')
-  const points = ref(0)
-  const pointsAwardedCount = ref(0)
-  const pointsAwardedResetTime = ref(new Date(Date.now()))
-  const godMode = ref(false)
+  const user = ref<User | null>()
+  const institution = ref<Institution | null>()
 
-  const institutionName = ref('')
-  const institutionShortName = ref('')
-  const institutionDescription = ref('')
-
-  const authenticated = computed(() => !!email.value)
+  const authenticated = computed(() => !!user.value)
 
   /**
    * init populates the store with the current user data, and does nothing
@@ -35,24 +26,6 @@ export const useAuthStore = defineStore('auth', () => {
           : undefined,
       })
       populate(res)
-      await getuserinstitution(cookie)
-    }
-    catch (e) {
-      console.error('[composables/user.ts] failed to init store', e)
-      return parseError(e)
-    }
-  }
-
-  async function getuserinstitution(cookie?: string) {
-    try {
-      const res = await $api<Institution>('/auth/myinstitution', {
-        headers: cookie
-          ? {
-              cookie,
-            }
-          : undefined,
-      })
-      populateInst(res)
     }
     catch (e) {
       console.error('[composables/user.ts] failed to init store', e)
@@ -75,7 +48,6 @@ export const useAuthStore = defineStore('auth', () => {
         },
       })
       populate(res)
-      await getuserinstitution()
     }
     catch (e) {
       console.error('[composables/user.ts] failed to login', e)
@@ -106,7 +78,6 @@ export const useAuthStore = defineStore('auth', () => {
         },
       })
       populate(res)
-      await getuserinstitution()
     }
     catch (e) {
       console.error('[composables/user.ts] failed to register', e)
@@ -119,45 +90,34 @@ export const useAuthStore = defineStore('auth', () => {
    * @param data data to populate the store with
    */
   function populate(data: User) {
-    firstName.value = data.firstName
-    lastName.value = data.lastName
-    email.value = data.email
+    user.value = {
+      ...data,
 
-    if (data.godMode)
-      godMode.value = data.godMode
-
-    if (data.points)
-      points.value = data.points
-
-    if (data.pointsAwardedCount)
-      pointsAwardedCount.value = data.pointsAwardedCount
-
-    if (data.pointsAwardedResetTime) {
-      const d = new Date(data.pointsAwardedResetTime)
-      if (d.getFullYear() !== 1) { // Zero value in Go time.TIme
-        pointsAwardedResetTime.value = d
-      }
     }
-  }
+    institution.value = data.institution
 
-  function populateInst(data: Institution) {
-    institutionName.value = data.name
-    institutionShortName.value = data.shortName
-    institutionDescription.value = data.description
-  }
+    // firstName.value = data.firstName
+    // lastName.value = data.lastName
+    // email.value = data.email
 
+    // if (data.godMode)
+    //   godMode.value = data.godMode
+
+    // if (data.points)
+    //   points.value = data.points
+
+    // if (data.pointsAwardedCount)
+    //   pointsAwardedCount.value = data.pointsAwardedCount
+
+    // if (data.pointsAwardedResetTime) {
+    //   const d = new Date(data.pointsAwardedResetTime)
+    //   if (d.getFullYear() !== 1) { // Zero value in Go time.TIme
+    //     pointsAwardedResetTime.value = d
+    //   }
+    // }
+  }
   return {
-    firstName,
-    lastName,
-    email,
-    points,
-    pointsAwardedCount,
-    pointsAwardedResetTime,
-    godMode,
-
-    institutionName,
-    institutionShortName,
-    institutionDescription,
+    ...user.value,
 
     authenticated,
 

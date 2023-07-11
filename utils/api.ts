@@ -6,6 +6,7 @@ interface Institution {
 }
 
 interface User {
+  institution: Institution | null | undefined
   firstName: string
   lastName: string
   email: string

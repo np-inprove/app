@@ -46,7 +46,7 @@ async function create() {
       summary: 'Success',
       detail: 'Group created',
     })
-    navigateTo(`/@${auth.institutionShortName}/manage/groups/${formData.value.shortName}`)
+    navigateTo(`/@${auth.institution?.shortName}/manage/groups/${formData.value.shortName}`)
   }
 }
 </script>

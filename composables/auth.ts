@@ -3,15 +3,10 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 export const useAuthStore = defineStore('auth', () => {
   const { $api } = useNuxtApp()
 
-  const firstName = ref('')
-  const lastName = ref('')
-  const email = ref('')
-  const points = ref(0)
-  const pointsAwardedCount = ref(0)
-  const pointsAwardedResetTime = ref(new Date(Date.now()))
-  const godMode = ref(false)
+  const user = ref<User | null>()
+  const institution = ref<Institution | null>()
 
-  const authenticated = computed(() => !!email.value)
+  const authenticated = computed(() => !!user.value)
 
   /**
    * init populates the store with the current user data, and does nothing
@@ -95,35 +90,34 @@ export const useAuthStore = defineStore('auth', () => {
    * @param data data to populate the store with
    */
   function populate(data: User) {
-    firstName.value = data.firstName
-    lastName.value = data.lastName
-    email.value = data.email
+    user.value = {
+      ...data,
 
-    if (data.godMode)
-      godMode.value = data.godMode
-
-    if (data.points)
-      points.value = data.points
-
-    if (data.pointsAwardedCount)
-      pointsAwardedCount.value = data.pointsAwardedCount
-
-    if (data.pointsAwardedResetTime) {
-      const d = new Date(data.pointsAwardedResetTime)
-      if (d.getFullYear() !== 1) { // Zero value in Go time.TIme
-        pointsAwardedResetTime.value = d
-      }
     }
-  }
+    institution.value = data.institution
 
+    // firstName.value = data.firstName
+    // lastName.value = data.lastName
+    // email.value = data.email
+
+    // if (data.godMode)
+    //   godMode.value = data.godMode
+
+    // if (data.points)
+    //   points.value = data.points
+
+    // if (data.pointsAwardedCount)
+    //   pointsAwardedCount.value = data.pointsAwardedCount
+
+    // if (data.pointsAwardedResetTime) {
+    //   const d = new Date(data.pointsAwardedResetTime)
+    //   if (d.getFullYear() !== 1) { // Zero value in Go time.TIme
+    //     pointsAwardedResetTime.value = d
+    //   }
+    // }
+  }
   return {
-    firstName,
-    lastName,
-    email,
-    points,
-    pointsAwardedCount,
-    pointsAwardedResetTime,
-    godMode,
+    ...user.value,
 
     authenticated,
 

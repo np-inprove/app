@@ -28,7 +28,7 @@ async function login() {
   formData.isLoading = true
   const err = await auth.login(formData.email, formData.password)
   if (!err)
-    return navigateTo('/dashboard')
+    return navigateTo(`/@${auth.institution?.shortName}/dashboard`)
   formData.error = err
   formData.isLoading = false
 }

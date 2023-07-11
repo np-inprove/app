@@ -6,6 +6,7 @@ interface Institution {
 }
 
 interface User {
+  institution: Institution | null | undefined
   firstName: string
   lastName: string
   email: string
@@ -23,3 +24,19 @@ interface InstitutionInviteLink {
 }
 
 type InstitutionRoles = 'admin' | 'educator' | 'member'
+
+interface Group {
+  id: number
+  name: string
+  shortName: string
+  description: string
+}
+
+interface GroupInviteLink {
+  id: string
+  code: string
+  role: GroupRoles
+  group: Group
+}
+
+type GroupRoles = 'owner' | 'educator' | 'member'

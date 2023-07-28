@@ -24,7 +24,7 @@
     "@unocss/nuxt": "^0.53.4",
     "@vueuse/core": "^10.2.0",
     "@vueuse/nuxt": "^10.2.0",
-    "eslint": "8.44.0",
+    "eslint": "8.46.0",
     "lint-staged": "^13.2.2",
     "nuxt": "^3.6.1",
     "pinia": "^2.1.4",

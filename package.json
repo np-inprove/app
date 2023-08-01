@@ -12,7 +12,7 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.39.5",
+    "@antfu/eslint-config": "^0.40.0",
     "@headlessui/vue": "^1.7.14",
     "@iconify-json/fluent-emoji": "^1.1.13",
     "@iconify-json/material-symbols": "^1.1.49",

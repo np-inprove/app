@@ -20,7 +20,7 @@
     "@nuxt/devtools": "^0.6.4",
     "@pinia/nuxt": "^0.4.11",
     "@types/node": "^18.16.5",
-    "@unocss/eslint-config": "^0.53.4",
+    "@unocss/eslint-config": "^0.55.0",
     "@unocss/nuxt": "^0.53.4",
     "@vueuse/core": "^10.2.0",
     "@vueuse/nuxt": "^10.2.0",
